@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "235570716651",
-    "firebase_url": "https://lan-war-backend.firebaseio.com",
-    "project_id": "lan-war-backend",
-    "storage_bucket": "lan-war-backend.appspot.com"
+    "project_number": "485653521479",
+    "firebase_url": "https://lan-war-app.firebaseio.com",
+    "project_id": "lan-war-app",
+    "storage_bucket": "lan-war-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:235570716651:android:37369d856d364195",
+        "mobilesdk_app_id": "1:485653521479:android:37369d856d364195",
         "android_client_info": {
           "package_name": "com.mweeksconsulting.lanwarapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "235570716651-g65mllgagjpt7rkoks6sja6affjr3kbg.apps.googleusercontent.com",
+          "client_id": "485653521479-r1blp8c7ms6jl6qo646unfcd2b7d9fc5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mweeksconsulting.lanwarapp",
-            "certificate_hash": "072c70f8b84f839e19ab35bbea3d71353ebb13d9"
+            "certificate_hash": "99d5f89ca1ce8496f582faa223461ee466d35232"
           }
         },
         {
-          "client_id": "235570716651-2tah4lle5vfj4nqskpttk2p44krth2n9.apps.googleusercontent.com",
+          "client_id": "485653521479-fr825vk1rk1kodfp1rn7m9l5vg8ekuph.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB_RSNInXn4Zo9ybJ9817jYbN2rlL9PqS0"
+          "current_key": "AIzaSyB8Rik9B_D4aErEisjRTBn7FmN-g-EkWV8"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "235570716651-2tah4lle5vfj4nqskpttk2p44krth2n9.apps.googleusercontent.com",
+              "client_id": "485653521479-fr825vk1rk1kodfp1rn7m9l5vg8ekuph.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

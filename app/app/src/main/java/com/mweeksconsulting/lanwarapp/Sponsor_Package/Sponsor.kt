@@ -1,10 +1,9 @@
-package com.mweeksconsulting.lanwarapp
+package com.mweeksconsulting.lanwarapp.Sponsor_Package
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.widget.ImageView
+import com.mweeksconsulting.lanwarapp.R
 import java.io.File
 import java.io.Serializable
 
@@ -20,7 +19,7 @@ data class Sponsor(val name: String, val description: String, val imagePath: Str
          true ->   {println("file found: " + imagePath)
              BitmapFactory.decodeStream(file.inputStream())}
          false->  {println("file not found use lanwar icon")
-             BitmapFactory.decodeResource(context.resources,R.mipmap.lanwar_icon)}
+             BitmapFactory.decodeResource(context.resources, R.mipmap.lanwar_icon)}
         }
     }
 }

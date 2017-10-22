@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp
+package com.mweeksconsulting.lanwarapp.Sponsor_Package
 
 import android.os.AsyncTask
 

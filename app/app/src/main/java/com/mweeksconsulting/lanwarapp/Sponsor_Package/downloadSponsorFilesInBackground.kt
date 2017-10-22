@@ -1,19 +1,10 @@
-package com.mweeksconsulting.lanwarapp
+package com.mweeksconsulting.lanwarapp.Sponsor_Package
 
-import android.content.Context
-import android.net.Uri
 import android.os.AsyncTask
-import android.support.design.widget.TabLayout
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.io.File
-import java.io.FileOutputStream
-import java.net.HttpURLConnection
-import java.net.URL
-import java.util.TreeSet
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.dom.DOMSource
@@ -34,7 +25,6 @@ class downloadSponsorFilesInBackground:AsyncTask<Map<String,Any>,ArrayList<Spons
 
 
     override fun doInBackground(vararg p0: Map<String,Any>): ArrayList<Sponsor> {
-        println("downloadSponsorFilesInBackground")
         val map = p0[0]
         val date : Long = map.getValue(UPDATE_DATE) as Long
         val sponsorFile : File = map[FILE] as File
@@ -81,18 +71,16 @@ class downloadSponsorFilesInBackground:AsyncTask<Map<String,Any>,ArrayList<Spons
                         //make sure file doesn't already exist before a download
                         //download file in background of async task
                         imgRef.getFile(imgFile).addOnSuccessListener {
-                            val sponsor = Sponsor(name,description,imgFile.path,observer.context)
+                            val sponsor = Sponsor(name, description, imgFile.path, observer.context)
                             sponsorArray.add(sponsor)
                             publishProgress(sponsorArray)
                         }.addOnFailureListener {
-                            val sponsor = Sponsor(name,description,imgFile.path,observer.context)
+                            val sponsor = Sponsor(name, description, imgFile.path, observer.context)
                             sponsorArray.add(sponsor)
                             publishProgress(sponsorArray)
                         }
                     }
-
                 }
-
         }
 
     return sponsorArray

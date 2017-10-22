@@ -1,9 +1,7 @@
-package com.mweeksconsulting.lanwarapp
+package com.mweeksconsulting.lanwarapp.Sponsor_Package
 
 import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 
 /**
  * Created by michael on 16/10/17.

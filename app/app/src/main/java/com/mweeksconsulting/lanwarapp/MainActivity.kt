@@ -25,9 +25,15 @@ class MainActivity : AppCompatActivity(),Swipe {
     override val context: Context = this
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(event!=null){
+            val xVelocity = mVelocityTracker?.xVelocity
             if (MotionEvent.ACTION_UP == event.actionMasked){
-                println("finish")
-                finish()
+                if (xVelocity != null && (xVelocity > 1000 || xVelocity < -1000)) {
+                    println("finish")
+                    println("finish:"+xVelocity)
+                    finish()
+                }
+
+
             }
         }
         return super<Swipe>.onTouchEvent(event)

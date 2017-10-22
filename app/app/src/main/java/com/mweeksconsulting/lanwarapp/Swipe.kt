@@ -3,15 +3,11 @@ package com.mweeksconsulting.lanwarapp
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ActivityInfo
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.support.v4.content.ContextCompat.startActivity
-import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.VelocityTracker
+import com.mweeksconsulting.lanwarapp.Sponsor_Package.SponsorsActivity
+import com.mweeksconsulting.lanwarapp.Staff_Package.StaffActivity
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by michael on 21/10/17.
@@ -40,49 +36,47 @@ interface Swipe{
 
                 }
                 MotionEvent.ACTION_UP -> {
-                  //  mVelocityTracker?.recycle()
                     val xVelocity = mVelocityTracker?.xVelocity
 
                     val mainClass = MainActivity::class.java
                     val sponsorShipClass = SponsorsActivity::class.java
+                    val staffClass = StaffActivity::class.java
 
-                    val maap = TreeMap<Int,Any>()
-                    maap.put(0,mainClass)
-                    maap.put(1,sponsorShipClass)
+
+                    val activityMap = TreeMap<Int,Any>()
+                    activityMap.put(0,mainClass)
+                    activityMap.put(1,sponsorShipClass)
+                    activityMap.put(2,staffClass)
+
 
                     var position:Int =
                     when(context.javaClass){
-                        sponsorShipClass->1
                         mainClass->0
+                        sponsorShipClass->1
+                        staffClass->2
+
                         else->-1
                     }
-                    val size = maap.size
+                    val size = activityMap.size
 
                     if(position!= -1) {
                         if (xVelocity != null && xVelocity > 1000) {
-                            println("right swipe")
                             position++
-                            println("old swipe :  " + position)
                             if (position >= size) {
                                 position = 0
                             }
-                            println("new swipe:  "+position)
 
-                            val cls:Class<Activity> = maap[position]as Class<Activity>
+                            val cls:Class<Activity> = activityMap[position]as Class<Activity>
                             val intent = Intent(context,cls)
 
                             context.startActivity(intent)
                         }//right swipe
-                        else if (xVelocity != null && xVelocity < 1000) {
-                            println("left swipe")
+                        else if (xVelocity != null && xVelocity < -1000) {
                             position--
-                            println("old swipe :  " + position)
                             if (position < 0) {
                                 position = size-1
                             }
-                            println("new swipe:  "+position)
-
-                            val cls:Class<Activity> = maap[position]as Class<Activity>
+                            val cls:Class<Activity> = activityMap[position]as Class<Activity>
                             val intent = Intent(context, cls)
                             context.startActivity(intent)
                         }

@@ -1,8 +1,6 @@
-package com.mweeksconsulting.lanwarapp
+package com.mweeksconsulting.lanwarapp.Sponsor_Package
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -12,9 +10,12 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import java.io.File
 import com.google.firebase.storage.FirebaseStorage
+import com.mweeksconsulting.lanwarapp.BuildConfig
+import com.mweeksconsulting.lanwarapp.R
+import com.mweeksconsulting.lanwarapp.Swipe
 
 
-class SponsorsActivity : AppCompatActivity(), SponsorObserver,Swipe{
+class SponsorsActivity : AppCompatActivity(), SponsorObserver, Swipe {
 
     private var sponsorArray = ArrayList<Sponsor>()
     private val SPONSOR_ORDER_LOCATION = "sponsor_order_location"
@@ -36,7 +37,6 @@ class SponsorsActivity : AppCompatActivity(), SponsorObserver,Swipe{
 
         remoteInstance = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder()
-                .setDeveloperModeEnabled(BuildConfig.DEBUG)
                 .build()
         remoteInstance.setConfigSettings(configSettings)
 
@@ -60,21 +60,15 @@ class SponsorsActivity : AppCompatActivity(), SponsorObserver,Swipe{
         refreshList()
 
 
-        var cacheExpiration: Long = 0
-        //expire the cache immediately for development mode.
-        if (remoteInstance.info.configSettings.isDeveloperModeEnabled()) {
-            cacheExpiration = 0
-        }
-
         //fetch the remote instance
-        remoteInstance.fetch(cacheExpiration)
+        remoteInstance.fetch()
                 .addOnCompleteListener{
                     task ->
                     //if the fetch was good then get the download uri
                     if (task.isSuccessful) {
-                        println("task succesful")
                         remoteInstance.activateFetched()
                         //I want to get the online storage location and download url
+
                         //TODO set up authentication and change storage rules to private
 
                         //storage reference
@@ -92,16 +86,9 @@ class SponsorsActivity : AppCompatActivity(), SponsorObserver,Swipe{
                             updateRemoteConfigValues(storageStringLocation,cloudUpdateDate,localUpdateDate)
 
                         }
-                        println("done observer")
-                    } else {
-                        println("task not succesful")
                     }
-                }.addOnFailureListener {
-            println("task failed")
-        }
+                }
 
-        //get the sponsor xml data download cloud Uri
-        println("default remote instance set")
     }
 
     //decide whether or not to download xml file with pictures
@@ -111,7 +98,6 @@ class SponsorsActivity : AppCompatActivity(), SponsorObserver,Swipe{
 
         //download from the storage
         if (localUpdateDate!= cloudUpdateDate) {
-            println("cloud uri and local uri do not match")
             //download alter and save the xml file, return a list of sponsor objects
             val downloadInBackground = downloadSponsorFilesInBackground()
             downloadInBackground.observer=this
@@ -120,30 +106,31 @@ class SponsorsActivity : AppCompatActivity(), SponsorObserver,Swipe{
             map.put("file",sponsorFile)
             map.put(SPONSOR_ORDER_LOCATION,storageStringLocation)
             downloadInBackground.execute(map)
-        }else{
-            println("update dates match")
         }
     }
 
     //get a set of sponsors from the new data
     override fun cloudSponsors(sponsorArray: ArrayList<Sponsor>) {
         this.sponsorArray = sponsorArray
-        println("cloud sponsor array filled")
         refreshList()
     }
 
 
     private fun refreshList(){
         val sponsorListView : ListView = findViewById(R.id.sponsorList) as ListView
-        sponsorListView.adapter = SponsorAdapter(this,R.id.sponsorList,sponsorArray)
+        sponsorListView.adapter = SponsorAdapter(this, R.id.sponsorList, sponsorArray)
     }
 
     override var mVelocityTracker: VelocityTracker? = null
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(event!=null){
+            val xVelocity = mVelocityTracker?.xVelocity
             if (MotionEvent.ACTION_UP == event.actionMasked){
-                finish()
-            }
+                if (xVelocity != null && (xVelocity > 1000|| xVelocity < -1000)) {
+                    println("finish")
+                    println("finish:"+xVelocity)
+                    finish()
+                }            }
         }
         return super<Swipe>.onTouchEvent(event)
     }

@@ -1,16 +1,13 @@
-package com.mweeksconsulting.lanwarapp
+package com.mweeksconsulting.lanwarapp.Sponsor_Package
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import android.graphics.drawable.Drawable
-import java.io.File
+import com.mweeksconsulting.lanwarapp.R
 
 
 /**
@@ -37,7 +34,7 @@ class SponsorAdapter  (context: Context, res : Int, var data: ArrayList<Sponsor>
             returnView = convertView
         }
 
-        val sponsor:Sponsor = data[position]
+        val sponsor: Sponsor = data[position]
 
             holder.SponsorImageView.setImageBitmap(sponsor.bitmap)
             holder.descriptionText.text = sponsor.description

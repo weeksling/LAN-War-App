@@ -1,9 +1,7 @@
-package com.mweeksconsulting.lanwarapp
+package com.mweeksconsulting.lanwarapp.Sponsor_Package
 
 import android.os.AsyncTask
 import android.os.Bundle
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.io.File
@@ -20,15 +18,12 @@ class readSponsorXMLFileInBackground:AsyncTask<File,Void,Bundle>() {
 
 
     override fun doInBackground(vararg sponsorFileArr: File): Bundle {
-        println("readSponsorXMLFileInBackground")
 
         val updateDate:Long
         val storageLocation:String
         val sponsorArray = ArrayList<Sponsor>()
-        println("Read xml file")
 
         if (sponsorFileArr[0].exists()) {
-            println("file exists")
             val dbFactory = DocumentBuilderFactory.newInstance()
             val docBuilder = dbFactory.newDocumentBuilder()
             val doc = docBuilder.parse(sponsorFileArr[0])
@@ -50,10 +45,11 @@ class readSponsorXMLFileInBackground:AsyncTask<File,Void,Bundle>() {
                     println(img_name)
                     val img_path = observer.context.filesDir.path+"/sponsor_images/" +img_name
                     println(img_path)
-                    val sponsor = Sponsor(name,description,img_path,observer.context)
+                    val sponsor = Sponsor(name, description, img_path, observer.context)
                     sponsorArray.add(sponsor)
                 }
             }
+
             val img_dir = File(observer.context.filesDir.path+"/sponsor_images")
             val fileList = img_dir.listFiles()
 
@@ -61,8 +57,6 @@ class readSponsorXMLFileInBackground:AsyncTask<File,Void,Bundle>() {
             //loop through file list
             //check if sponsor list contains file
             //if it does not contain the file delete
-            println("START OF LIST")
-
             val imageFiles = ArrayList<File>()
             sponsorArray.forEach {
                 s->
@@ -72,24 +66,13 @@ class readSponsorXMLFileInBackground:AsyncTask<File,Void,Bundle>() {
             fileList.forEach {
                 file ->
                 if (!imageFiles.contains(file)){
-                    println("delete file ")
                     file.delete()
                 }
-                println(file)
             }
-            println("END OF LIST")
-
-
         } else {
             updateDate = 0
             storageLocation = "THERE IS NO LOCAL FILE"
         }
-
-
-
-
-
-
 
 
         //return a bundle instead of a remote instance

@@ -28,8 +28,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sponsor.SponsorsActivity" />
-        <activity android:name=".staff.StaffActivity" />
+        <activity android:name=".sponsor.SponsorsActivity"
+            android:label="@string/sponsorship"/>
+        <activity android:name=".staff.StaffActivity"
+            android:label="@string/Staff"/>
     </application>
 
 </manifest>

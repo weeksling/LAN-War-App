@@ -1,5 +1,6 @@
 package com.mweeksconsulting.lanwarapp.sponsor
 
+import android.util.Log
 import java.io.File
 
 /**
@@ -16,12 +17,16 @@ class SponsorInformation (val observer: SponsorObserver){
     //gets local sponsor information
     fun useLocalSponsorData(){
         val sponsorFile = File(observer.context.filesDir.path + "/" + "sponsorOrder.xml")
-        //read xml file in background
-        println(sponsorFile)
         val img_dir = File(observer.context.filesDir.path + "/sponsor_images/")
+
+        //read xml file in background
+        var res = false
+        //res = sponsorFile.delete()
+        Log.i("delete Sponsor File", res.toString())
+
         val readXmlFile = ReadSponsorXMLFileInBackground(observer,img_dir)
         readXmlFile.execute(sponsorFile)
-        println("use local sponsor")
+        Log.i("Sponsor Information","use local sponsor")
     }
 
 
@@ -33,7 +38,7 @@ class SponsorInformation (val observer: SponsorObserver){
 
         val downloadInBackground = DownloadSponsorFilesInBackground(SPONSOR_ORDER_LOCATION,UPDATE_DATE,sponsor_img_Dir,observer)
         downloadInBackground.execute()
-        println("use cloud sponsor")
+        Log.i("Sponsor Information","use cloud sponsor")
 
     }
 

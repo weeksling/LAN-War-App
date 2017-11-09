@@ -2,6 +2,7 @@ package com.mweeksconsulting.lanwarapp.sponsor
 
 import android.content.Context
 import android.os.AsyncTask
+import android.util.Log
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.storage.FirebaseStorage
@@ -68,7 +69,7 @@ class DownloadSponsorFilesInBackground(val SPONSOR_ORDER_LOCATION:String, val UP
                     //if the fetch was good then get the download uri
                     if (task.isSuccessful) {
                         remoteInstance.activateFetched()
-                        println("Fetch succesful")
+                        Log.i("Sponsor Download","Remote Config Fetch succesful")
                         //I want to get the online storage location and download url
 
                         //storage reference
@@ -82,15 +83,12 @@ class DownloadSponsorFilesInBackground(val SPONSOR_ORDER_LOCATION:String, val UP
                             sponsorPageRef.metadata.addOnSuccessListener { storageMetadata ->
                                 val cloudUpdateDate = storageMetadata.updatedTimeMillis.toString()
 
-                                println("cloud update: "+cloudUpdateDate)
-                                println("local update: "+ localUpdateDate)
-                                println("local storae location: "+ localStorageLocation)
+                                Log.i("Sponsor Download","cloud update: "+cloudUpdateDate)
+                                Log.i("Sponsor Download","local update: "+ localUpdateDate)
+                                Log.i("Sponsor Download","local storae location: "+ localStorageLocation)
 
                                     if (cloudUpdateDate != localUpdateDate || localStorageLocation == "NO LOCAL STORAGE" ) {
-                                    println("DATES DO NOT MATCH")
-
-
-
+                                        Log.i("Sponsor Download","DATES DO NOT MATCH")
                                     val storageLocation = remoteInstance.getString(SPONSOR_ORDER_LOCATION)
                                     val updateDate = storageMetadata.updatedTimeMillis.toString()
 
@@ -145,7 +143,7 @@ class DownloadSponsorFilesInBackground(val SPONSOR_ORDER_LOCATION:String, val UP
                                 }
 
                             }else{
-                                    println("sponsor dates match ")
+                                        Log.i("Sponsor Download","sponsor dates match ")
                                 }
                         }
                     }
@@ -158,15 +156,14 @@ class DownloadSponsorFilesInBackground(val SPONSOR_ORDER_LOCATION:String, val UP
 
     override fun onProgressUpdate(vararg values: ArrayList<Sponsor>) {
         super.onProgressUpdate(*values)
-        println("progress update")
+        Log.i("Sponsor Download","progress update")
             observer.refreshSponsors(values[0])
     }
 
       override fun onPostExecute(result: ArrayList<Sponsor>) {
         super.onPostExecute(result)
           if(sponsorArray.size>0) {
-              println("post execute")
-
+              Log.i("Sponsor Download","post execute")
               observer.refreshSponsors(result)
           }
       }

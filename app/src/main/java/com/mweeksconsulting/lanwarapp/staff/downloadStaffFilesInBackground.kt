@@ -2,6 +2,7 @@ package com.mweeksconsulting.lanwarapp.staff
 
 import android.os.AsyncTask
 import android.os.Debug
+import android.util.Log
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.storage.FirebaseStorage
@@ -64,9 +65,10 @@ class downloadStaffFilesInBackground (val STAFF_ORDER_LOCATION: String, val LOCA
             println("Cache expiration date: " + cacheExpiration)
             remoteInstance.fetch(cacheExpiration)
                     .addOnCompleteListener { task ->
-                        println("is complete")
+                        Log.i("Staff File Download", "Remote Instance Fetch Complete")
                         //if the fetch was good then get the download uri
                         if (task.isSuccessful) {
+
                             remoteInstance.activateFetched()
 
                             //storage reference
@@ -77,13 +79,12 @@ class downloadStaffFilesInBackground (val STAFF_ORDER_LOCATION: String, val LOCA
                                 //also wish I knew this early on
                             staffPageRef.metadata.addOnSuccessListener { storageMetadata ->
                                     val cloudUpdateDate = storageMetadata.updatedTimeMillis.toString()
-                                    println("storage meta data")
                                     if (cloudUpdateDate != localDate || localStorageLocation == "NO LOCAL STORAGE") {
-                                        println("dates do not match")
+                                        Log.i("Staff File Download", "dates do not match")
 
 
                                         staffPageRef.getFile(staffFile).addOnSuccessListener {
-                                            println("staff file downloaded")
+                                            Log.i("Staff File Download", "staff file downloaded")
 
                                         val storageLocation = remoteInstance.getString(STAFF_ORDER_LOCATION)
                                         val updateDate = storageMetadata.updatedTimeMillis.toString()
@@ -103,7 +104,7 @@ class downloadStaffFilesInBackground (val STAFF_ORDER_LOCATION: String, val LOCA
                                             val input = DOMSource(doc)
                                             transformer.transform(input, output)
 
-                                                println(staffFile.path)
+                                            Log.i("Staff File Path",staffFile.path)
 
                                             val sponsorList = doc.getElementsByTagName("staff")
                                             for (i in 0 until sponsorList.length) {
@@ -147,7 +148,7 @@ class downloadStaffFilesInBackground (val STAFF_ORDER_LOCATION: String, val LOCA
 
                                                 if (img_name_text != "NA") {
                                                     val imgRef = imageFolder.child(img_name_text)
-                                                    println("NA")
+                                                    Log.i("Staff Img Name","NA")
                                                     val dir = File(LOCAL_STAFF_IMG_PATH)
                                                     dir.mkdir()
                                                     val imgFile = File(dir, img_name_text)
@@ -156,12 +157,12 @@ class downloadStaffFilesInBackground (val STAFF_ORDER_LOCATION: String, val LOCA
 
 
                                                     imgRef.getFile(imgFile).addOnSuccessListener {
-                                                        println("success")
+                                                        Log.i("Staff Img download","success")
                                                         val staff = Staff(nameText, aliasText, roleText, imgFile.path, observer.context)
                                                         staffArray.add(staff)
                                                         publishProgress(staffArray)
                                                     }.addOnFailureListener {
-                                                        println("fail")
+                                                        Log.i("Staff Img download","fail")
 
                                                         val staff = Staff(nameText, aliasText, roleText, "NO CLOUD FILE", observer.context)
                                                         staffArray.add(staff)
@@ -177,10 +178,10 @@ class downloadStaffFilesInBackground (val STAFF_ORDER_LOCATION: String, val LOCA
                                     }
                                 }
                             }else{
-                                        println("staff dates match")
+                                        Log.i("Staff file","staff dates match")
                                     }
                         }.addOnFailureListener {
-                                    println("fail remote instance")
+                                    Log.i("Staff file", "fail remote instance")
                                 }
                     }
         }

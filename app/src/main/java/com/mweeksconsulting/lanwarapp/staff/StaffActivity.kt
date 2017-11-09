@@ -11,7 +11,6 @@ import com.mweeksconsulting.lanwarapp.Swipe
 
 
 class StaffActivity : AppCompatActivity (),StaffObserver,Swipe{
-    var staffArray = ArrayList<Staff>()
 
     //this activity will show a list of all staff members
     //the staff members's roles and the the staff pictures
@@ -28,31 +27,29 @@ class StaffActivity : AppCompatActivity (),StaffObserver,Swipe{
 
     //get a set of sponsors from the new data
     override fun refreshStaff(staffArray: ArrayList<Staff>) {
-        this.staffArray = staffArray
-        refreshList()
-    }
-
-    private fun refreshList(){
         val staffListView : ListView = findViewById<ListView>(R.id.staffList) as ListView
+        if(staffArray.isEmpty()){
+            staffListView.visibility=ListView.GONE
+        }else{
+            staffListView.visibility=ListView.VISIBLE
+        }
         staffListView.adapter = StaffAdapter(this, R.id.staffList, staffArray)
     }
+
+
 
     override val context: Context = this
     override var mVelocityTracker: VelocityTracker? = null
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+        println("MOTION")
         if (event != null) {
             val xVelocity = mVelocityTracker?.xVelocity
             if (MotionEvent.ACTION_UP == event.actionMasked) {
                 if (xVelocity != null && (xVelocity > 1000|| xVelocity < -1000)) {
-                    println("finish")
-                    println("finish:"+xVelocity)
                     finish()
                 }
             }
         }
         return super<Swipe>.onTouchEvent(event)
     }
-
-    //read the xml file and return an array
-
 }

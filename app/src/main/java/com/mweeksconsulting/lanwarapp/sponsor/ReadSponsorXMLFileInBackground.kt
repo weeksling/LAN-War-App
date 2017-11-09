@@ -1,6 +1,7 @@
 package com.mweeksconsulting.lanwarapp.sponsor
 
 import android.os.AsyncTask
+import android.util.Log
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.io.File
@@ -18,7 +19,7 @@ class ReadSponsorXMLFileInBackground(val observer: SponsorObserver, val img_dir:
 
         val sponsorFile = sponsorFileArr[0]
         if (sponsorFile.exists()) {
-            println("exists")
+            Log.i("Sponsor Read XML", "File exists")
             val dbFactory = DocumentBuilderFactory.newInstance()
             val docBuilder = dbFactory.newDocumentBuilder()
             val doc = docBuilder.parse(sponsorFile)
@@ -33,16 +34,16 @@ class ReadSponsorXMLFileInBackground(val observer: SponsorObserver, val img_dir:
                     val name = element.getElementsByTagName("sponsor_name").item(0).textContent
                     val img_name = element.getElementsByTagName("img_name").item(0).textContent
                     val description = element.getElementsByTagName("description").item(0).textContent
-                    println(img_name)
+                    Log.i("Sponsor Read XML","img name: "+img_name)
                     val img_path = img_dir.path+"/" + img_name
                     val sponsor = Sponsor(name, description, img_path, observer.context)
                     sponsorArray.add(sponsor)
-                    println(img_path)
+                    Log.i("Sponsor Read XML","img path: "+img_path)
                 }
             }
 
             if (img_dir.exists() && img_dir.isDirectory) {
-                println("img_dir exists")
+                Log.i("Sponsor Read XML","img_dir exists")
                 val fileList = img_dir.listFiles()
 
                 //get all image files
@@ -60,7 +61,7 @@ class ReadSponsorXMLFileInBackground(val observer: SponsorObserver, val img_dir:
                     }
                 }
             } else {
-                println("doest not exist")
+                Log.i("Sponsor Read XML", "file doest not exist")
             }
         }
 
@@ -70,7 +71,7 @@ class ReadSponsorXMLFileInBackground(val observer: SponsorObserver, val img_dir:
 
     override fun onPostExecute(result: ArrayList<Sponsor>?) {
         super.onPostExecute(result)
-        println("onp post execute")
+        Log.i("Sponsor Read XML" ,"onp post execute")
 
         if (result != null) {
             observer.refreshSponsors(result)

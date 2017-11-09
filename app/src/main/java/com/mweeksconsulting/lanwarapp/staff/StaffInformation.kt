@@ -1,5 +1,6 @@
 package com.mweeksconsulting.lanwarapp.staff
 
+import android.util.Log
 import java.io.File
 
 /**
@@ -15,13 +16,19 @@ class StaffInformation(val observer: StaffObserver){
 
 
     fun useLocalStaffData(){
+
         val staffFile = File(observer.context.filesDir.path + "/" + "staffOrder.xml")
+        val deleteThis = File(observer.context.filesDir.path,"staffOrder.xml")
+        var res = false
+        //res = deleteThis.delete()
+        Log.i("delete Staff File", res.toString())
+
         //read xml file in background
         val staffImgPath= observer.context.filesDir.path+"/staff_pictures/"
 
         val readXmlFile = ReadStaffFileInBackground(STAFF_ORDER_LOCATION,staffImgPath,observer)
         readXmlFile.execute(staffFile)
-        println("use local sponsor")
+        Log.i("Staff Information","use local sponsor\"")
     }
 
 
@@ -31,17 +38,12 @@ class StaffInformation(val observer: StaffObserver){
     fun useStaffCloudData() {
         val staffFile = File(observer.context.filesDir.path + "/" + "staffOrder.xml")
         val staffImgPath= observer.context.filesDir.path+"/staff_pictures/"
-        println(staffFile.path)
+        Log.i("Staff Img Path",staffFile.path)
 
         val downloadInBackground = downloadStaffFilesInBackground(STAFF_ORDER_LOCATION,staffImgPath,UPDATE_DATE,observer)
-
         downloadInBackground.execute(staffFile)
-        println("use cloud sponsor")
+        Log.i("Staff","use cloud staff")
 
     }
-
-
-
-
 
 }

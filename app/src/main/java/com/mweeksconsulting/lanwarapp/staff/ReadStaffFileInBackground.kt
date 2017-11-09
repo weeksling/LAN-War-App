@@ -1,6 +1,7 @@
 package com.mweeksconsulting.lanwarapp.staff
 
 import android.os.AsyncTask
+import android.util.Log
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.io.File
@@ -19,7 +20,7 @@ class ReadStaffFileInBackground(val STAFF_ORDER_LOCATION:String,
     override fun doInBackground(vararg staffFileArr: File): ArrayList<Staff> {
         val staffArray = ArrayList<Staff>()
         if (staffFileArr[0].exists()) {
-            println("staff file exists")
+            Log.i("StaffFileBackground","staff file exists")
 
             val dbFactory = DocumentBuilderFactory.newInstance()
             val docBuilder = dbFactory.newDocumentBuilder()
@@ -51,12 +52,15 @@ class ReadStaffFileInBackground(val STAFF_ORDER_LOCATION:String,
                     val imgPath = LOCAL_STAFF_IMG_PATH +"/" +img_name
                     val staff = Staff(name, alias, role,imgPath, observer.context)
                     staffArray.add(staff)
-                    println(imgPath)
+                    Log.i("StaffFileImgPath",imgPath)
 
                 }
             }
             val staffImgFile = File(LOCAL_STAFF_IMG_PATH)
             if(staffImgFile.exists() && staffImgFile.isDirectory) {
+
+                Log.i("StaffFileBackground","staff Img file exists")
+
                 val fileList = staffImgFile.listFiles()
                 //loop through file list
                 //check if sponsor list contains file
@@ -67,25 +71,25 @@ class ReadStaffFileInBackground(val STAFF_ORDER_LOCATION:String,
                 }
                 fileList.forEach { file ->
                     if (!imageFiles.contains(file)) {
-
                         file.delete()
                     }
                 }
             }else{
-                println("Staff img file does not exist")
+                Log.i("StaffFileBackground","staff Img File does not exists")
             }
         }else{
-            println("staff file does not exist")
+            Log.i("StaffFileBackground","staff file does not exists")
 
         }
-
         //return a bundle instead of a remote instance
         return staffArray
     }
 
     override fun onPostExecute(result: ArrayList<Staff>) {
         super.onPostExecute(result)
-        println("read xml file post execute")
+        Log.i("Staff File","read xml file post execute")
+        Log.i("Staff File result",result.toString())
+
         observer.refreshStaff(result)
     }
 }

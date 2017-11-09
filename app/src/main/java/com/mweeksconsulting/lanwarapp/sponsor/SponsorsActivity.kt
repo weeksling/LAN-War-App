@@ -12,7 +12,6 @@ import com.mweeksconsulting.lanwarapp.Swipe
 
 class SponsorsActivity : AppCompatActivity(), SponsorObserver, Swipe {
 
-    private var sponsorArray = ArrayList<Sponsor>()
       override val context: Context = this
 
 
@@ -28,15 +27,17 @@ class SponsorsActivity : AppCompatActivity(), SponsorObserver, Swipe {
 
     //get a set of sponsors from the new data
     override fun refreshSponsors(sponsorArray: ArrayList<Sponsor>) {
-        println("refresh sponsor")
-        this.sponsorArray = sponsorArray
-        refreshList()
+        val sponsorListView : ListView = findViewById<ListView>(R.id.sponsorList) as ListView
+        if(sponsorArray.isEmpty()){
+            sponsorListView.visibility=ListView.GONE
+        }else{
+            sponsorListView.visibility=ListView.VISIBLE
+        }
+        sponsorListView.adapter = SponsorAdapter(this, R.id.sponsorList, sponsorArray)
+
+
     }
 
-    private fun refreshList(){
-        val sponsorListView : ListView = findViewById<ListView>(R.id.sponsorList) as ListView
-        sponsorListView.adapter = SponsorAdapter(this, R.id.sponsorList, sponsorArray)
-    }
 
     override var mVelocityTracker: VelocityTracker? = null
     override fun onTouchEvent(event: MotionEvent?): Boolean {

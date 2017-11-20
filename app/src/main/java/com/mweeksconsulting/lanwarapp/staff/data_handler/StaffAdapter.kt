@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp.sponsor
+package com.mweeksconsulting.lanwarapp.sponsor.data_handler
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.mweeksconsulting.lanwarapp.R
+import com.mweeksconsulting.lanwarapp.sponsor.Sponsor
 
 
 /**
@@ -15,7 +16,7 @@ import com.mweeksconsulting.lanwarapp.R
  * The Sponsor adapter makes the sponsor list look nice and
  * uses the view holder pattern for smooth scrolling
  */
-class SponsorAdapter  (context: Context, res : Int, var data: ArrayList<Sponsor> ):
+class StaffAdapter(context: Context, res : Int, var data: List<Sponsor> ):
         ArrayAdapter<Sponsor>(context,res,data){
 
     override fun getView(position: Int, convertView: View? , parent: ViewGroup?): View? {
@@ -37,8 +38,8 @@ class SponsorAdapter  (context: Context, res : Int, var data: ArrayList<Sponsor>
         }
 
         val sponsor: Sponsor = data[position]
-
-            holder.SponsorImageView.setImageBitmap(sponsor.bitmap)
+        sponsor.context=context
+            holder.SponsorImageView.setImageBitmap(sponsor.getBitMap())
             holder.descriptionText.text = sponsor.description
 
         return returnView

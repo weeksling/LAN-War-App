@@ -20,7 +20,7 @@ class StaffInformation(val observer: StaffObserver){
         val staffFile = File(observer.context.filesDir.path + "/" + "staffOrder.xml")
         val deleteThis = File(observer.context.filesDir.path,"staffOrder.xml")
         var res = false
-        //res = deleteThis.delete()
+        res = deleteThis.delete()
         Log.i("delete Staff File", res.toString())
 
         //read xml file in background

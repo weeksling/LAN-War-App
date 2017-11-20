@@ -136,8 +136,8 @@ class downloadStaffFilesInBackground (val STAFF_ORDER_LOCATION: String, val LOCA
                                                 val img_name_text: String = img_name
 
 
-                                                    val sponsorImageDir = File(observer.context.filesDir.parent + "/sponsor_images")
-                                                    sponsorImageDir.mkdir()
+                                                  //  val sponsorImageDir = File(observer.context.filesDir.parent + "/sponsor_images")
+                                                   // sponsorImageDir.mkdir()
 
 
                                                 //imageLocation

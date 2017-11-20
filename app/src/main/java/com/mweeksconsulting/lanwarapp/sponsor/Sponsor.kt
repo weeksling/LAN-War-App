@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
 import android.util.Log
+import com.mweeksconsulting.lanwarapp.LanWarApplication
 import com.mweeksconsulting.lanwarapp.R
 import java.io.File
 import java.io.Serializable
@@ -21,7 +22,7 @@ import java.io.Serializable
 @Entity
 class Sponsor(@PrimaryKey val name: String, val description: String, val imagePath: String, val createDate:String) {
     @Ignore
-    lateinit var context:Context
+    val context = LanWarApplication.appSingleton.context
 
     fun getBitMap() :Bitmap{
         Log.i("Sponsor Adapter", "Setting sponsor image ")

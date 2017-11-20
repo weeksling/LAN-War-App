@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp.sponsor.data
+package com.mweeksconsulting.lanwarapp.data
 
 import android.util.Log
 import com.google.firebase.storage.StorageReference
@@ -13,7 +13,7 @@ import javax.xml.parsers.DocumentBuilderFactory
  * Created by michael on 10/11/17.
  */
 
-class DownloadSponsorData(val inStream:InputStream, val cloudDate :String, val sponsorPageRef:StorageReference, val sponsorDAO: SponsorDAO, val imageFilePath:String) :Runnable{
+class DownloadSponsorData(val inStream:InputStream, val cloudDate :String, val sponsorPageRef:StorageReference, val imageFilePath:String) :Runnable{
 
     override fun run() {
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
@@ -67,7 +67,7 @@ class DownloadSponsorData(val inStream:InputStream, val cloudDate :String, val s
             s ->                     Log.i("download sponsors",s.toString())
 
         }
-        LoadStaffFromDB.DeleteSponsors().execute().get()
-        LoadStaffFromDB.InsertSponsors(newSponsorArray).execute()
+        LoadSponsorsFromDB.DeleteSponsors().execute().get()
+        LoadSponsorsFromDB.InsertSponsors(newSponsorArray).execute()
     }
 }

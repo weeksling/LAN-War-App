@@ -1,12 +1,14 @@
-package com.mweeksconsulting.lanwarapp
+package com.mweeksconsulting.lanwarapp.ui
 
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.VelocityTracker
+import com.mweeksconsulting.lanwarapp.R
+import com.mweeksconsulting.lanwarapp.Swipe
 
-class MainActivity : AppCompatActivity(),Swipe {
+class MainActivity : AppCompatActivity(), Swipe {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

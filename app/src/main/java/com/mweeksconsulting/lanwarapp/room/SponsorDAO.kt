@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp.sponsor.data
+package com.mweeksconsulting.lanwarapp.room
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao

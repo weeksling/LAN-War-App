@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp.sponsor.data
+package com.mweeksconsulting.lanwarapp.data
 
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask
@@ -8,14 +8,11 @@ import com.mweeksconsulting.lanwarapp.sponsor.Sponsor
 /**
  * Created by michael on 20/11/17.
  */
-class LoadStaffFromDB : AsyncTask<Void, Void, LiveData<List<Sponsor>>?>(){
+class LoadSponsorsFromDB: AsyncTask<Void, Void, LiveData<List<Sponsor>>?>(){
 
     override fun doInBackground(vararg p0: Void?): LiveData<List<Sponsor>>? {
         return sponsorDAO.loadSponsors()
     }
-
-
-
 
 
     internal class LoadSponsorsDate:AsyncTask<Void,Void,Array<String>?>(){

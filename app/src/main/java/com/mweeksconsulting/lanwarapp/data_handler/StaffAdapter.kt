@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp.staff
+package com.mweeksconsulting.lanwarapp.data_handler
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,13 +8,14 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.mweeksconsulting.lanwarapp.R
+import com.mweeksconsulting.lanwarapp.staff.Staff
 
 /**
  * Created by michael on 17/10/17.
  * Staff adapter to make the staff list view look nice
  * Uses the view holder pattern for smoother scrolling
  */
-class StaffAdapter(context: Context, res : Int, var data: ArrayList<Staff> ):
+class StaffAdapter(context: Context, res : Int, var data: List<Staff> ):
         ArrayAdapter<Staff>(context,res,data){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {

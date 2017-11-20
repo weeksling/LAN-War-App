@@ -22,7 +22,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,9 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sponsor.ui.SponsorsActivity"
+        <activity android:name="com.mweeksconsulting.lanwarapp.ui.SponsorsActivity"
             android:label="@string/sponsorship"/>
-        <activity android:name=".staff.StaffActivity"
+        <activity android:name=".ui.StaffActivity"
             android:label="@string/Staff"/>
     </application>
 

@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp.sponsor.ui
+package com.mweeksconsulting.lanwarapp.ui
 
 import android.arch.lifecycle.*
 import android.content.Context
@@ -11,19 +11,17 @@ import com.mweeksconsulting.lanwarapp.R
 import com.mweeksconsulting.lanwarapp.Swipe
 import android.arch.lifecycle.ViewModelProviders
 import com.mweeksconsulting.lanwarapp.sponsor.Sponsor
-import com.mweeksconsulting.lanwarapp.sponsor.data_handler.StaffViewModel
+import com.mweeksconsulting.lanwarapp.data_handler.SponsorAdapter
+import com.mweeksconsulting.lanwarapp.data_handler.ActivityModel
 
 
 class SponsorsActivity : AppCompatActivity(),Swipe  {
-
-
-
-    lateinit var sponsorViewModel : StaffViewModel
+    lateinit var sponsorViewModel : ActivityModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sponsors)
-        sponsorViewModel = ViewModelProviders.of(this).get(StaffViewModel::class.java)
+        sponsorViewModel = ViewModelProviders.of(this).get(ActivityModel::class.java)
 
         Log.i("sponsor activity", "on create")
 
@@ -55,8 +53,6 @@ class SponsorsActivity : AppCompatActivity(),Swipe  {
 
 
     override val context: Context = this
-
-
     override var mVelocityTracker: VelocityTracker? = null
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         println("sponsors")
@@ -67,6 +63,7 @@ class SponsorsActivity : AppCompatActivity(),Swipe  {
                     println("finish")
                     println("finish:"+xVelocity)
                     finish()
+
                 }            }
         }
         return super<Swipe>.onTouchEvent(event)

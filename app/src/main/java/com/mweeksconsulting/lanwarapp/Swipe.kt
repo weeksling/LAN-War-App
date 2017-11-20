@@ -5,8 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.view.MotionEvent
 import android.view.VelocityTracker
-import com.mweeksconsulting.lanwarapp.sponsor.ui.SponsorsActivity
-import com.mweeksconsulting.lanwarapp.staff.StaffActivity
+import com.mweeksconsulting.lanwarapp.ui.MainActivity
+import com.mweeksconsulting.lanwarapp.ui.SponsorsActivity
+import com.mweeksconsulting.lanwarapp.ui.StaffActivity
 import java.util.*
 
 /**
@@ -46,7 +47,7 @@ interface Swipe{
                     val activityMap = TreeMap<Int,Any>()
                     activityMap.put(0,mainClass)
                     activityMap.put(1,sponsorShipClass)
-                    //activityMap.put(2,staffClass)
+                    activityMap.put(2,staffClass)
 
 
                     var position:Int =

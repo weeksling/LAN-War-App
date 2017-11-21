@@ -11,13 +11,13 @@ import android.view.VelocityTracker
 import android.widget.ListView
 import com.mweeksconsulting.lanwarapp.R
 import com.mweeksconsulting.lanwarapp.Swipe
-import com.mweeksconsulting.lanwarapp.data_handler.StaffAdapter
-import com.mweeksconsulting.lanwarapp.data_handler.ActivityModel
+import com.mweeksconsulting.lanwarapp.staff.data_handler.StaffAdapter
 import com.mweeksconsulting.lanwarapp.staff.Staff
+import com.mweeksconsulting.lanwarapp.staff.data_handler.StaffModel
 
 
 class StaffActivity : AppCompatActivity (), Swipe{
-    lateinit var staffViewModel : ActivityModel
+    lateinit var staffViewModel : StaffModel
 
     //this activity will show a list of all staff members
     //the staff members's roles and the the staff pictures
@@ -25,7 +25,7 @@ class StaffActivity : AppCompatActivity (), Swipe{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_staff_)
 
-        staffViewModel = ViewModelProviders.of(this).get(ActivityModel::class.java)
+        staffViewModel = ViewModelProviders.of(this).get(StaffModel::class.java)
 
         Log.i("staff activity", "on create")
 

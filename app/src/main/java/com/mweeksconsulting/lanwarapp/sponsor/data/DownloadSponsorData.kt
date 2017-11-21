@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp.data
+package com.mweeksconsulting.lanwarapp.sponsor.data
 
 import android.util.Log
 import com.google.firebase.storage.StorageReference
@@ -34,6 +34,7 @@ class DownloadSponsorData(val inStream:InputStream, val cloudDate :String, val s
                     val name = attritubeNodes.getElementsByTagName("sponsor_name").item(0).textContent
                     val description = attritubeNodes.getElementsByTagName("description").item(0).textContent
                     val img_name = attritubeNodes.getElementsByTagName("img_name").item(0).textContent
+                    val website = attritubeNodes.getElementsByTagName("website")?.item(0)?.textContent
 
                     val dir = File(imageFilePath)
                     dir.mkdirs()
@@ -57,7 +58,7 @@ class DownloadSponsorData(val inStream:InputStream, val cloudDate :String, val s
                         }.removeOnFailureListener {
                             Log.i("download sponsors", "FAILED")
                         }
-                    val sponsor = Sponsor(name, description, imgFile.path, cloudDate)
+                    val sponsor = Sponsor(name, description, imgFile.path, cloudDate,website)
                     newSponsorArray.add(sponsor)
                     Log.i("download sponsors","saved to DB")
                 }

@@ -10,6 +10,7 @@ import com.mweeksconsulting.lanwarapp.staff.Staff
 /**
  * Created by michael on 10/11/17.
  */
+
 @Database (entities = arrayOf(Sponsor::class, Staff::class),version = 1)
 abstract class LanWarDatabase :RoomDatabase() {
    abstract val sponsorDao: SponsorDAO

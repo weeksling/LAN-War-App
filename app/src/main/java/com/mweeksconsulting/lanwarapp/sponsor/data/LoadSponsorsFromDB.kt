@@ -1,4 +1,4 @@
-package com.mweeksconsulting.lanwarapp.data
+package com.mweeksconsulting.lanwarapp.sponsor.data
 
 import android.arch.lifecycle.LiveData
 import android.os.AsyncTask

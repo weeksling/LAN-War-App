@@ -1,9 +1,8 @@
-package com.mweeksconsulting.lanwarapp.data_handler
+package com.mweeksconsulting.lanwarapp.sponsor.data_handler
 import android.arch.lifecycle.*
 import android.util.Log
-import com.mweeksconsulting.lanwarapp.LanWarApplication.appSingleton.repo
+import com.mweeksconsulting.lanwarapp.LanWarApplication
 import com.mweeksconsulting.lanwarapp.staff.Staff
-import com.mweeksconsulting.lanwarapp.data.Repo
 import com.mweeksconsulting.lanwarapp.sponsor.Sponsor
 
 
@@ -15,15 +14,12 @@ import com.mweeksconsulting.lanwarapp.sponsor.Sponsor
 
  */
 
-class ActivityModel : ViewModel(){
-    private var  staffList : LiveData<List<Staff>>?= null
+class SponsorModel : ViewModel(){
     private var  sponsorList : LiveData<List<Sponsor>>?= null
 
     init {
-        Log.i("view model","Init")
+        Log.i("sponsor view model","Init")
         loadSponsors()
-        loadStaff()
-
     }
 
     ///get the data from the repo in the background if null
@@ -31,43 +27,17 @@ class ActivityModel : ViewModel(){
         if (sponsorList == null) {
             Log.i("view model","list is null")
             sponsorList = MutableLiveData<List<Sponsor>>()
-            sponsorList = repo.getSponsors()
+            sponsorList = LanWarApplication.appSingleton.sponsorRepo.getSponsors()
 
             Log.i("sponsor view model","got sponsors from sponsor REPO")
         }else{
             Log.i("sponsor view model","list is not null")
         }
     }
-
-    private fun loadStaff() {
-        if (staffList == null) {
-            Log.i("sponsor view model","list is null")
-            staffList = MutableLiveData<List<Staff>>()
-            staffList = repo.getStaff()
-
-            Log.i("sponsor view model","got sponsors from sponsor REPO")
-        }else{
-            Log.i("sponsor view model","list is not null")
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
 
 
     fun getSponsors():LiveData<List<Sponsor>>?{
          return sponsorList
     }
 
-    fun getStaff():LiveData<List<Staff>>?{
-        return staffList
-    }
 }

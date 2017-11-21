@@ -20,7 +20,7 @@ import java.io.Serializable
  */
 
 @Entity
-class Sponsor(@PrimaryKey val name: String, val description: String, val imagePath: String, val createDate:String) {
+class Sponsor(@PrimaryKey val name: String, val description: String, val imagePath: String, val createDate:String,val webSite: String?) {
     @Ignore
     val context = LanWarApplication.appSingleton.context
 
@@ -48,6 +48,6 @@ class Sponsor(@PrimaryKey val name: String, val description: String, val imagePa
     }
 
     override fun toString(): String {
-        return ("name: " + name +" description: " + description + " imagePath: " +imagePath + " createDate: " + createDate)
+        return ("name: " + name +" description: " + description + " imagePath: " +imagePath + " createDate: " + createDate + " website: " +webSite)
     }
 }

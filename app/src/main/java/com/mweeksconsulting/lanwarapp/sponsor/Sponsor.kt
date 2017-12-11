@@ -9,8 +9,11 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Environment
 import android.util.Log
+import android.widget.ImageView
 import com.mweeksconsulting.lanwarapp.LanWarApplication
+import com.mweeksconsulting.lanwarapp.LanWarApplication.appSingleton.context
 import com.mweeksconsulting.lanwarapp.R
+import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.Serializable
 
@@ -21,30 +24,22 @@ import java.io.Serializable
 
 @Entity
 class Sponsor(@PrimaryKey val name: String, val description: String, val imagePath: String, val createDate:String,val webSite: String?) {
-    @Ignore
-    val context = LanWarApplication.appSingleton.context
-
-    fun getBitMap() :Bitmap{
+    fun getImageView(imageView: ImageView):ImageView{
         Log.i("Sponsor Adapter", "Setting sponsor image ")
         Log.i("Sponsor Adapter", imagePath)
 
         val file = File(imagePath)
-       val bitmap = when (file.exists()) {
+        when (file.exists() && file.isFile) {
             true -> {
                 println("file found: " + imagePath)
-                BitmapFactory.decodeStream(file.inputStream())
+                Picasso.with(context).load(file).into(imageView)
             }
             false -> {
                 println("file not found use lanwar icon")
-                BitmapFactory.decodeResource(context.resources,R.mipmap.lanwar_icon)
+                Picasso.with(context).load(R.drawable.lanwar).into(imageView)
             }
         }
-
-        if(bitmap == null){
-            return                 BitmapFactory.decodeResource(context.resources,R.mipmap.lanwar_icon)
-        }else {
-            return bitmap
-        }
+        return imageView
     }
 
     override fun toString(): String {

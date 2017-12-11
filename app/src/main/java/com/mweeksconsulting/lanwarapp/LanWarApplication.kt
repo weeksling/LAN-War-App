@@ -17,6 +17,9 @@ import com.mweeksconsulting.lanwarapp.sponsor.data.StaffDAO
 import com.mweeksconsulting.lanwarapp.staff.data_handler.StaffRepo
 import java.util.concurrent.Executors
 import android.net.ConnectivityManager
+import android.content.IntentFilter
+
+
 
 
 
@@ -29,7 +32,6 @@ class LanWarApplication : Application() {
         lateinit var staffDAO : StaffDAO
         lateinit var sponsorRepo : SponsorRepo
         lateinit var staffRepo : StaffRepo
-        lateinit var connectionManager: ConnectivityManager
 
     }
 
@@ -42,13 +44,10 @@ class LanWarApplication : Application() {
         //initalize sponsor repo when app is first opened
         sponsorRepo = SponsorRepo()
         staffRepo = StaffRepo()
-        appSingleton.connectionManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         //initalize data when app loads in background
         Executors.newSingleThreadExecutor().execute(sponsorRepo)
         Executors.newSingleThreadExecutor().execute(staffRepo)
-
         Log.i("Lan war app","On Create")
-
 
     }
 

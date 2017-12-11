@@ -78,9 +78,6 @@ class DownloadStaffData(val inStream:InputStream, val cloudDate :String, val sto
                         Log.i("download staff", "imge file existts?: "+imgFile.exists())
                         Log.i("download staff", "imge file name?: "+img_name)
                         Log.i("download staff", "imge file path?: "+imgFile.path)
-
-
-
                     }
                     val staff = Staff(name, alias, role, imgFile.path, cloudDate)
                     newStaffArray.add(staff)

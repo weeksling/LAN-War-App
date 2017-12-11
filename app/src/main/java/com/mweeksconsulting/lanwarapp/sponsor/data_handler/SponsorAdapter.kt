@@ -38,7 +38,7 @@ class SponsorAdapter  (context: Context, res : Int, var data: List<Sponsor> ):
         }
 
         val sponsor: Sponsor = data[position]
-            holder.SponsorImageView.setImageBitmap(sponsor.getBitMap())
+            holder.SponsorImageView = sponsor.getImageView(holder.SponsorImageView)
             holder.descriptionText.text = sponsor.description
 
         return returnView

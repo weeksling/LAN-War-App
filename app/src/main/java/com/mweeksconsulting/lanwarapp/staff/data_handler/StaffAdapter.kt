@@ -1,6 +1,7 @@
 package com.mweeksconsulting.lanwarapp.staff.data_handler
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,8 @@ class StaffAdapter(context: Context, res : Int, var data: List<Staff> ):
         holder.staffName.setText(staff.name)
         holder.roleName.setText(staff.role)
         holder.alias.setText(staff.alias)
-        holder.staffImage.setImageBitmap(staff.bitmap)
+
+        holder.staffImage = staff.getImageView(holder.staffImage)
 
 
         return returnView

@@ -20,14 +20,14 @@ import java.util.concurrent.Executors
 class StaffRepo:Runnable {
 
     override fun run() {
-        Log.i("sponsor SponsorRepo", "sponsor repo start init")
+        Log.i("staff repo", "sponsor repo start init")
         refreshStaffArray()
-        Log.i("sponsor SponsorRepo", "sponsor repo finished init")    }
+        Log.i("staff repo", "sponsor repo finished init")    }
 
     //returns the local DB first
     //while refresh sponsors runs in the background
     fun getStaff(): LiveData<List<Staff>>? {
-        Log.i("sponsor SponsorRepo", "get sponsors from sponsor DAO")
+        Log.i("staff repo", "get staff repo from staff DAO")
         return  LoadStaffFromDB().execute().get()
     }
 
@@ -50,7 +50,7 @@ class StaffRepo:Runnable {
             updateStaff(localDateArr,remoteInstance)
         }
 
-        Log.i("sponsor SponsorRepo", "after update sponsors")
+        Log.i("staff repo", "after update staff")
     }
 
     /**
@@ -71,10 +71,10 @@ class StaffRepo:Runnable {
 
                             //if local dates array is empty or more than 1 update
                             //or if the cloud date != localdate
-                            if ( (localDateArr == null ) ||
+                            if ( localDateArr == null  ||
                                     (localDateArr.isEmpty()||localDateArr.size>1) ||
                                     cloudDate != localDateArr[0]){
-                                Log.i("Sponsor repo", "must download files")
+                                Log.i("staff repo", "must download files")
 
                                 staffPageRef.stream.addOnSuccessListener { snapShot ->
                                     Executors.newSingleThreadExecutor().execute(DownloadStaffData(snapShot.stream,

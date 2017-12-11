@@ -58,14 +58,17 @@ class DownloadSponsorData(val inStream:InputStream, val cloudDate :String, val s
                         }.removeOnFailureListener {
                             Log.i("download sponsors", "FAILED")
                         }
+                    Log.i("download sponsors",cloudDate)
                     val sponsor = Sponsor(name, description, imgFile.path, cloudDate,website)
                     newSponsorArray.add(sponsor)
                     Log.i("download sponsors","saved to DB")
                 }
             }
 
+         Log.i("download sponsors","saved all sponsors to DB")
+
         newSponsorArray.forEach {
-            s ->                     Log.i("download sponsors",s.toString())
+            s ->                     Log.i("download sponsors",s.createDate)
 
         }
         LoadSponsorsFromDB.DeleteSponsors().execute().get()

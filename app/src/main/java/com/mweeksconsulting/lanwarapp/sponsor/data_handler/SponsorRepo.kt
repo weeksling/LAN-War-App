@@ -4,7 +4,6 @@ import android.app.IntentService
 import android.arch.lifecycle.LiveData
 import android.content.Intent
 import android.util.Log
-import javax.inject.Singleton
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import com.google.firebase.storage.FirebaseStorage
@@ -26,7 +25,7 @@ import java.util.concurrent.Executors
 class SponsorRepo:Runnable {
 
     override fun run() {
-        refreshStaffArray()
+        refreshSponsorArray()
         Log.i("sponsor SponsorRepo", "sponsor repo start init")
         Log.i("sponsor SponsorRepo", "sponsor repo finished init")
     }
@@ -37,7 +36,7 @@ class SponsorRepo:Runnable {
         return  LoadSponsorsFromDB().execute().get()
     }
 
-    private fun refreshStaffArray() {
+    private fun refreshSponsorArray() {
         val remoteInstance = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder()
                 .setDeveloperModeEnabled(BuildConfig.DEBUG)
@@ -51,7 +50,7 @@ class SponsorRepo:Runnable {
 
         remoteInstance.fetch(cacheExpiration).addOnSuccessListener {
             remoteInstance.activateFetched()
-            val localDateArr :Array<String>?= LoadStaffFromDB.LoadStaffDate().execute().get()
+            val localDateArr :Array<String>?= LoadSponsorsFromDB.LoadSponsorsDate().execute().get()
             updateSponsor(localDateArr,remoteInstance)
             Log.i("sponsor SponsorRepo", "after update sponsors")
         }
@@ -74,10 +73,15 @@ class SponsorRepo:Runnable {
             val cloudDate = storageMetadata.updatedTimeMillis.toString()
             //if local dates array is empty or more than 1 update
             //or if the cloud date != localdate
-            if ( (localDateArr == null ) ||
+            if ( localDateArr == null ||
                     (localDateArr.isEmpty()||localDateArr.size>1) ||
                     cloudDate != localDateArr[0]){
                 Log.i("Sponsor repo", "must download files")
+                Log.i("Sponsor repo",   localDateArr?.size.toString())
+                Log.i("Sponsor repo",   localDateArr?.get(0))
+                Log.i("Sponsor repo",   cloudDate)
+
+
                 sponsorPageRef.stream.addOnSuccessListener { snapShot ->
                     Executors.newSingleThreadExecutor().execute(DownloadSponsorData(snapShot.stream,
                             cloudDate, storageRef,

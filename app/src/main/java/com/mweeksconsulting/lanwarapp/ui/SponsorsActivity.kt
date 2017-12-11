@@ -7,35 +7,49 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ListView
-import com.mweeksconsulting.lanwarapp.R
-import com.mweeksconsulting.lanwarapp.Swipe
 import android.arch.lifecycle.ViewModelProviders
+import android.content.BroadcastReceiver
 import com.mweeksconsulting.lanwarapp.sponsor.Sponsor
 import com.mweeksconsulting.lanwarapp.sponsor.data_handler.SponsorAdapter
 import com.mweeksconsulting.lanwarapp.sponsor.data_handler.SponsorModel
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
-import com.mweeksconsulting.lanwarapp.LanWarApplication
+import android.widget.ProgressBar
+import android.widget.TextView
+import com.mweeksconsulting.lanwarapp.*
+import com.mweeksconsulting.lanwarapp.R
+import java.util.concurrent.Executors
 
 
-class SponsorsActivity : AppCompatActivity(),Swipe  {
+class SponsorsActivity : AppCompatActivity(),Swipe {
     lateinit var sponsorViewModel : SponsorModel
-    lateinit var listview : ListView
+    lateinit var netWorkReceiver: SponsorNetwork
+    var sponsorList:List<Sponsor>?=null
+    var netWorkReceiverReg = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sponsors)
-        listview =  findViewById<ListView>(R.id.sponsorList)
+        setContentView(R.layout.loading_layout)
+        //check if the internet is dead
+
+        // Registers BroadcastReceiver to track network connection changes.
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        netWorkReceiver = SponsorNetwork()
+        this.registerReceiver(netWorkReceiver, filter)
+        netWorkReceiverReg=true
 
         sponsorViewModel = ViewModelProviders.of(this).get(SponsorModel::class.java)
-
         Log.i("sponsor activity", "on create")
 
         // Create the observer which updates the UI.
         sponsorViewModel.getSponsors()?.observe(this, Observer<List<Sponsor>> {
             newSponsors ->
-            if(newSponsors != null) {
+            if(newSponsors != null && newSponsors.isNotEmpty()) {
+                sponsorList=newSponsors
                 Log.i("sponsor activity: " ,"refresh list")
 
                 refreshList(newSponsors)
@@ -43,8 +57,17 @@ class SponsorsActivity : AppCompatActivity(),Swipe  {
                 Log.i("sponsor activity: " ,"do not refresh list")
             }
         })
-
         Log.i("sponsor activity", "bottom of on create")
+
+    }
+
+    private fun refreshList(newSponsors:List<Sponsor>){
+        setContentView(R.layout.activity_sponsors)
+        val listview  = findViewById<ListView>(R.id.sponsorList)
+
+        Log.i("sponsor activity", R.id.sponsorList.toString())
+        val adapter = SponsorAdapter(this, R.layout.sponsor_linear_layout, newSponsors)
+        listview.adapter=adapter
 
         listview.setOnItemClickListener { adapterView, view, i, l ->
             println("we have a click")
@@ -52,28 +75,49 @@ class SponsorsActivity : AppCompatActivity(),Swipe  {
             Log.i("Sponsor activity",sponsor.toString())
             val path = sponsor.webSite
             if(path != null) {
-              //  val uri =  LaunchWebPage(path).execute().get()
-                val uri =       Uri.parse(path)
+                val connManager:ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val networkInfo = connManager.activeNetworkInfo
+                val isConnected = networkInfo?.isConnected
 
-                val activeNetwork = LanWarApplication.appSingleton.connectionManager.activeNetworkInfo
-                val isConnected = activeNetwork != null && activeNetwork.isConnected
-
-                if (uri != null && isConnected){
+                val uri = Uri.parse(path)
+                if (uri != null && networkInfo!=null || (isConnected!= null && !isConnected)){
                     val webIntent =Intent(Intent.ACTION_VIEW,uri)
-                    startActivity(webIntent)
-                }
+                    startActivity(webIntent) }
             }
+        }
+
+
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if(netWorkReceiverReg) {
+            unregisterReceiver(netWorkReceiver)
+            netWorkReceiverReg=false
         }
     }
 
+    //network connection changed
+    fun retry(networkInfo: NetworkInfo?) {
+        val isConnected = networkInfo?.isConnected
 
-    private fun refreshList(newSponsors:List<Sponsor>){
-        Log.i("sponsor activity", R.id.sponsorList.toString())
-        val adapter = SponsorAdapter(this, R.layout.sponsor_linear_layout, newSponsors)
-        listview.adapter=adapter
+        if(sponsorList==null) {
+            if (networkInfo == null || (isConnected != null && !isConnected)) {
+                setContentView(R.layout.loading_layout)
+                val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+                val detailText = findViewById<TextView>(R.id.details)
+                progressBar.visibility = View.INVISIBLE
+                detailText.text = "No Network connection"
+            } else {
+                setContentView(R.layout.loading_layout)
+                val detailText = findViewById<TextView>(R.id.details)
+                detailText.text = "Downloading Sponsor Information"
+            }
+        }
+        Executors.newSingleThreadExecutor().execute(LanWarApplication.appSingleton.sponsorRepo)
+
     }
-
-
 
 
     override val context: Context = this
@@ -92,4 +136,14 @@ class SponsorsActivity : AppCompatActivity(),Swipe  {
         }
         return super<Swipe>.onTouchEvent(event)
     }
+
+    inner class SponsorNetwork: BroadcastReceiver() {
+        override fun onReceive(context: Context, p1: Intent?) {
+            val connManager:ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkInfo = connManager.activeNetworkInfo
+            Log.i("Network Manager","On Recive")
+            retry(networkInfo)
+        }
+    }
+
 }

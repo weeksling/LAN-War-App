@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity(), Swipe {
                     println("finish:"+xVelocity)
                     finish()
                 }
-
-
             }
         }
         return super<Swipe>.onTouchEvent(event)

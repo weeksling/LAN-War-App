@@ -17,7 +17,6 @@ interface SponsorDAO {
     //insert sponsor if name is the same replace sponsor with new sponsor
     @Insert(onConflict = REPLACE)
     fun saveSponsor (sponsor: Sponsor)
-
     @Query("DELETE FROM Sponsor")
     fun deleteSponsors()
     //insert new list of sponsors

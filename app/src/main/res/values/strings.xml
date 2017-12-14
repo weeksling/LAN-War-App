@@ -17,4 +17,8 @@
     <string name="LanwarImageView">Lanwar Sponsor Image</string>
     <string name="Staff">Staff</string>
     <string name="sponsorship">Sponsorship</string>
+    <string name="Notify_Me">Notify Me</string>
+    <string name="Location">Location:</string>
+    <string name="time">Time:</string>
+    <string name="date">Date:</string>
 </resources>

@@ -1,53 +1,33 @@
 package com.mweeksconsulting.lanwarapp.ui
 
-import com.mweeksconsulting.lanwarapp.R
 import android.content.Context
-import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.VelocityTracker
-import android.view.View
+import com.mweeksconsulting.lanwarapp.R
 import com.mweeksconsulting.lanwarapp.Swipe
 
-class MainActivity : AppCompatActivity(), Swipe {
+class SwipeNavActivity : AppCompatActivity(), Swipe {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+        setContentView(R.layout.other_main_activity)
 
-    fun openFacebook (view: View) {
-        openLink("http://www.facebook.com/LANWARX")
-
-    }
-
-    fun openTwitter (view: View) {
-        openLink("https://twitter.com/lanwarx")
-    }
-
-    private fun openLink (url:String){
-        if (!isConnected()){
-            Log.e("openLink", "No connection")
-            return
-        }
-
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        return
-        // TODO: Open the actual URI
-    }
-
-    private fun isConnected () : Boolean {
-        val connManager: ConnectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val path = "https://www.twitch.tv/faraazkhan"
+                //  val uri =  LaunchWebPage(path).execute().get()
+        val uri =       Uri.parse(path)
+        val connManager: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connManager.activeNetworkInfo
-        return networkInfo.isConnected
-    }
+        val isConnected = networkInfo?.isConnected
 
+        if (uri != null && isConnected != null && isConnected){
+        //   val webIntent = Intent(Intent.ACTION_VIEW,uri)
+        //   startActivity(webIntent)
+        }
+    }
 
 
     override var mVelocityTracker: VelocityTracker? = null
@@ -69,5 +49,7 @@ class MainActivity : AppCompatActivity(), Swipe {
 
 
     }
+
+
 
 }

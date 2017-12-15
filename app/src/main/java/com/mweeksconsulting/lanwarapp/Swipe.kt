@@ -6,10 +6,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.MotionEvent
 import android.view.VelocityTracker
-import com.mweeksconsulting.lanwarapp.ui.MainActivity
-import com.mweeksconsulting.lanwarapp.ui.Raffle_activity
-import com.mweeksconsulting.lanwarapp.ui.SponsorsActivity
-import com.mweeksconsulting.lanwarapp.ui.StaffActivity
+import com.mweeksconsulting.lanwarapp.ui.*
 import java.util.*
 
 /**

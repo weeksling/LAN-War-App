@@ -9,6 +9,6 @@ show the staff and sponsors, and show nearby restaurants to their current locati
 
 # Authors/Contributors
 
-Matthew Weeks
-Michael Setnyk
-Arshdeep Benipal
+Matthew Weeks 
+Michael Setnyk 
+Arshdeep Benipal 

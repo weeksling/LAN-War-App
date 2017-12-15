@@ -23,12 +23,12 @@ import android.view.VelocityTracker
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import com.mweeksconsulting.lanwarapp.NavigationActivity
 import com.mweeksconsulting.lanwarapp.Swipe
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RaffleActivity : NavigationActivity(),Swipe {
+//Used luigi http://piq.codeus.net/picture/288905/faceplant
+class Raffle_activity : AppCompatActivity(),Swipe {
 
     lateinit var pager :ViewPager
     lateinit var pageAdapter: ScreenSlidePageAdapter
@@ -87,6 +87,8 @@ class RaffleActivity : NavigationActivity(),Swipe {
             override fun onPageSelected(position: Int) {
             }
         })
+        val pattern = "hh:mm a"
+
 
         Log.i("current raffle: ", raffle.toString())
         var time = if (raffle?.raffleTime!=null) raffle.raffleTime else ""
@@ -100,7 +102,14 @@ class RaffleActivity : NavigationActivity(),Swipe {
         val dateLabel = findViewById<TextView>(R.id.date_lable)
         val locationLabel = findViewById<TextView>(R.id.loc_label)
 
-        timeView.text=time
+        val timeFortmat = SimpleDateFormat(pattern)
+        val toDate = SimpleDateFormat("hh:mm")
+        if(time!="") {
+            timeView.text = timeFortmat.format(toDate.parse(time))
+        }else{
+            timeView.text = ""
+
+        }
         dateView.text=date
         locationView.text=loc
 
@@ -140,7 +149,7 @@ class RaffleActivity : NavigationActivity(),Swipe {
 
 
             //new alarm
-            val pattern = "dd-MM-yyyy HH:mm"
+            val pattern = "dd-MM-yyyy hh:mm a"
             val dateFormat = SimpleDateFormat(pattern)
             val input = date + time
 
@@ -166,6 +175,7 @@ class RaffleActivity : NavigationActivity(),Swipe {
             val am = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
             val intent = Intent(this, RaffleReciver::class.java)
+            intent.putExtra("TIME",input)
             val cal = Calendar.getInstance()
             cal.time= raffleDate
             cal.add(Calendar.HOUR,-1)

@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 /**
  * Created by michael on 10/11/17.
+ * Downloads the sponsor information
  */
 
 class DownloadSponsorData(val inStream:InputStream, val cloudDate :String, val sponsorPageRef:StorageReference, val imageFilePath:String) :Runnable{

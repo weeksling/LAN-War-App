@@ -9,6 +9,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textViewStyle">@style/ebgTextViewStyle</item>
         <item name="android:buttonStyle">@style/blackOpsButtonTheme</item>
+        <item name="android:windowBackground">@drawable/background_gradient</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <!-- Base application theme. -->

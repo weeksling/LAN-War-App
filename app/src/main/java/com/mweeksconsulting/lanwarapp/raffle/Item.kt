@@ -16,6 +16,10 @@ import java.util.*
 
 /**
  * Created by michael on 13/12/17.
+ * The item class that holds all the item data
+ * relies on the raffle id
+ * gets the bitmap image when asked
+ * uses Piccasso to load the image
  */
 @Entity
 (foreignKeys =  arrayOf(ForeignKey

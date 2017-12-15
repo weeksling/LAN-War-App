@@ -21,22 +21,18 @@ import com.mweeksconsulting.lanwarapp.ui.RaffleActivity
 
 /**
  * Created by michael on 14/12/17.
+ * this class receiver the raffle alarm intent that is set to it
+ * sends a notification when the even is 1 hour away or 10 minutes away
  */
 class RaffleReciver:BroadcastReceiver() {
 
+    //decide which notification to send
     override fun onReceive(context: Context, intent: Intent) {
         Log.i("Raffle Reciever","raffled on Reveive")
-        val sharedPref = context.getSharedPreferences ("TIME",android.content.Context.MODE_PRIVATE)
-        val dateString = sharedPref.getString("time","12-12-19970 24:00")
-        val pattern1 = "dd-MM-yyyy HH:mm"
+        val dateString = intent.getStringExtra("TIME")
+        val pattern1 = "dd-MM-yyyy hh:mm a"
         val dateFormat1 = SimpleDateFormat(pattern1)
         val date = dateFormat1.parse(dateString)
-        val pattern2 = "HH:mm"
-        val dateFormat2 = SimpleDateFormat(pattern2)
-        val timeFormat = dateFormat2.format(date)
-
-        Log.i("Raffle Reciever","time $timeFormat")
-
 
         val now = Calendar.getInstance() as Calendar
 
@@ -50,6 +46,7 @@ class RaffleReciver:BroadcastReceiver() {
 
     }
 
+    //send a reminder notification
     fun distanceNotification(raffleDate: Date, context: Context){
         Log.i("Raffle Reciever","distant notification")
 
@@ -80,8 +77,6 @@ class RaffleReciver:BroadcastReceiver() {
                 .setOnlyAlertOnce(true)
                 .setLights(Color.RED, 3000, 3000)
                 .setChannelId(CHANNEL_ID).build()
-
-
         notificationManager.notify(notifyID,notification)
 
         Log.i("Raffle Reciever","built notification")
@@ -102,6 +97,7 @@ class RaffleReciver:BroadcastReceiver() {
         am.set(AlarmManager.RTC_WAKEUP, tenMinutesBeforeRaffle.time, alarmIntent)
     }
 
+    //send an urgent reminder notification
     fun soonNotification(raffleDate: Date ,context: Context){
         Log.i("Raffle Reciever","soon notification")
         val notifyID = 1;
@@ -147,8 +143,9 @@ class RaffleReciver:BroadcastReceiver() {
 
     fun raffleMessage(currentRaffleTime:Date):String{
         val ct = Calendar.getInstance() as Calendar
-        val pattern = "hh:mm"
+        val pattern = "hh:mm a"
         val dateFormat = SimpleDateFormat(pattern)
+
         if(currentRaffleTime.before(ct.time)){
             return "There is a raffle going on now!"
         }

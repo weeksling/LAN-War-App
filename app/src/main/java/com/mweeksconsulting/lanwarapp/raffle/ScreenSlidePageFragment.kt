@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.*
 
 /**
  * Created by michael on 12/12/17.
+ * This is what is shown as the raffle item name and image
  */
 class ScreenSlidePageFragment:Fragment() {
     private var itemList:Array<Item>? = null
@@ -43,10 +44,6 @@ class ScreenSlidePageFragment:Fragment() {
         if(tmp!=null) {
             pos = tmp
         }
-        Log.i("Screen Slide","On Create pos: $pos")
-        val path = itemList?.get(pos)?.imagePath
-        Log.i("Screen Slide","On Create :img path: $path" )
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

@@ -12,6 +12,7 @@ import java.util.concurrent.Executors
 
 /**
  * Created by michael on 12/12/17.
+ * decides what data to return and where the sources are
  */
 class RaffleRepo:Runnable {
    override fun run() {

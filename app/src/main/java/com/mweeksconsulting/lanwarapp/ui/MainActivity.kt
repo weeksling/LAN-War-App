@@ -10,9 +10,12 @@ import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.VelocityTracker
 import android.view.View
+import com.mweeksconsulting.lanwarapp.Swipe
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Swipe {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,4 +47,27 @@ class MainActivity : AppCompatActivity() {
         val networkInfo = connManager.activeNetworkInfo
         return networkInfo.isConnected
     }
+
+
+
+    override var mVelocityTracker: VelocityTracker? = null
+    override val context: Context = this
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if(event!=null){
+            val xVelocity = mVelocityTracker?.xVelocity
+            if (MotionEvent.ACTION_UP == event.actionMasked){
+                if (xVelocity != null && (xVelocity > 1000 || xVelocity < -1000)) {
+                    println("finish")
+                    println("finish:"+xVelocity)
+                    finish()
+                }
+
+
+            }
+        }
+        return super<Swipe>.onTouchEvent(event)
+
+
+    }
+
 }

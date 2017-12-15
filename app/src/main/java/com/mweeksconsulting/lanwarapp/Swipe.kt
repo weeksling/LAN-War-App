@@ -6,10 +6,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.MotionEvent
 import android.view.VelocityTracker
-import com.mweeksconsulting.lanwarapp.ui.SwipeNavActivity
-import com.mweeksconsulting.lanwarapp.ui.Raffle_activity
-import com.mweeksconsulting.lanwarapp.ui.SponsorsActivity
-import com.mweeksconsulting.lanwarapp.ui.StaffActivity
+import com.mweeksconsulting.lanwarapp.ui.*
 import java.util.*
 
 /**
@@ -41,7 +38,7 @@ interface Swipe{
                 MotionEvent.ACTION_UP -> {
                     val xVelocity = mVelocityTracker?.xVelocity
 
-                    val mainClass = SwipeNavActivity::class.java
+                    val mainClass = MainActivity::class.java
                     val sponsorShipClass = SponsorsActivity::class.java
                     val staffClass = StaffActivity::class.java
                     val raffleClass = Raffle_activity::class.java

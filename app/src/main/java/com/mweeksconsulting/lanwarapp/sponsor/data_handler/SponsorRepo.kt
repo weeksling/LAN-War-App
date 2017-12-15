@@ -78,7 +78,7 @@ class SponsorRepo:Runnable {
                     cloudDate != localDateArr[0]){
                 Log.i("Sponsor repo", "must download files")
                 Log.i("Sponsor repo",   localDateArr?.size.toString())
-                Log.i("Sponsor repo",   localDateArr?.get(0))
+//                 Log.i("Sponsor repo",   localDateArr?.get(0))
                 Log.i("Sponsor repo",   cloudDate)
 
 

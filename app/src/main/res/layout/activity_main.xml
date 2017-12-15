@@ -33,7 +33,10 @@
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/follow_us_on_social_media" />
+            android:text="@string/follow_us_on_social_media"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +61,6 @@
         </LinearLayout>
 
         <TextView
-<<<<<<< HEAD
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,11 +68,6 @@
             android:text="@string/about"
             android:textSize="18sp" />
 
-=======
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about"/>
->>>>>>> cc703c3c316ded433a9e5fed0660e7ea008f22d3
     </LinearLayout>
 
 </LinearLayout>

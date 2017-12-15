@@ -25,7 +25,8 @@
         <TextView
             android:id="@+id/Staff_Name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/staff_alias"
@@ -36,7 +37,6 @@
             android:id="@+id/StaffRole"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="casual"
             android:textSize="24sp" />
 
     </LinearLayout>

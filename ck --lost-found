@@ -1,0 +1,136 @@
+[33mcommit 6eaa838ec8c6244404cd6aab81922ee20c3fdb24[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Thu Dec 14 09:58:30 2017 -0500
+
+    Created the raffle activity
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit d908353ff5b783cc4b6378ed32a2954661ab43ff[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Mon Dec 11 02:33:29 2017 -0500
+
+    Added more information when a network is slow or offline.
+    Added Piccaso to easily handle better image loading
+    Fixed bug that caused sponsors to always redownload
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit 4df3e270bafae5d91751de7692a2d768d7fd8f0a[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Mon Dec 11 02:26:35 2017 -0500
+
+    Added more information when a network is slow or offline.
+    Added Piccaso to easily handle better image loading
+    Fixed bug that caused sponsors to always redownload
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit 2e9c5153191a1d48149009ee64232e17b0b281f5[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Tue Nov 21 15:58:48 2017 -0500
+
+    Refactored sponsors and staff.  Allows the sponsor item in the list the ablity to launch a webpage when clicked
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit 31c4e4c0455497c6480eb7caaa08e08a9513a3bf[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Tue Nov 21 15:53:34 2017 -0500
+
+    Refactored sponsors and staff.  Allows the sponsor item in the list the ablity to launch a webpage when clicked
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit 1bd2a7c2ff766dc024ca9a40fbf8838adcc6ce83[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Mon Nov 20 17:32:22 2017 -0500
+
+    refactored sponsor activities to use kotlin singleton and android arch componets 1.0.  Updated again
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit e22cd20287b65fe52f189dab8cf46c78d6fc146f[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Mon Nov 20 01:31:07 2017 -0500
+
+    refactored sponsor activities to use kotlin singleton and android arch componets 1.0
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit 94bb6fd1954800086ad65441cc6cc3686b8a1ebd[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Mon Nov 20 01:28:50 2017 -0500
+
+    refactored sponsor activities to use kotlin singleton and android arch componets 1.0
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit a43adf9f93dd21d1ecaf94634fe0a93b5e834867[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Wed Nov 8 22:02:43 2017 -0500
+
+    Fixed a bug that caused activities to freeze if not connected to the wifi.
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit d6a7a1b8bf2c6c1e6eee2e2760c8b80fe5c5957d[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Wed Nov 8 18:17:36 2017 -0500
+
+    Fixed the sponsorship and staff activties.  Updated them to better work with android 3.0. updated the activity names
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit cee95ba5b06b5b55f49a6a445fece7391ac8375b[m
+Author: michaelSetnyk <michael.setnyk@uoit.net>
+Date:   Wed Nov 1 00:17:17 2017 -0400
+
+    Fixed the sponsorship and staff activties.  Updated them to better work with android 3.0.
+    
+    Signed-off-by: michaelSetnyk <michael.setnyk@uoit.net>
+
+[33mcommit ccd51f97f43541a74c9cc258be7fa4bf49a3ef15[m
+Author: Matthew Weeks <weeksling@gmail.com>
+Date:   Mon Oct 30 15:40:37 2017 -0400
+
+    Attempting to remove all of the build warnings in 3.0
+
+[33mcommit ff52e50253ded9440270ff26bb975a713c070491[m
+Merge: 41fc6c3 ee54f8a
+Author: Matthew Weeks <weeksling@gmail.com>
+Date:   Mon Oct 30 15:08:18 2017 -0400
+
+    Merge pull request #9 from weeksling/move-app-to-root
+    
+    Moved Android app source into the root of project, so that we can use…
+
+[33mcommit ee54f8af188ca5c8928e7cd69548c187ec4228fb[m
+Author: Matthew Weeks <weeksling@gmail.com>
+Date:   Mon Oct 30 14:57:58 2017 -0400
+
+    Moved Android app source into the root of project, so that we can use Android Studio's GitHub integrations.
+
+[33mcommit 41fc6c3c00527867ff00702338acf29db53395bd[m
+Author: Matthew Weeks <weeksling@gmail.com>
+Date:   Wed Sep 27 22:42:49 2017 -0400
+
+    Added google-services.json (Definitely not best practice. Keep my API key secret lol
+
+[33mcommit 37d26b85dcd63068b2b74fed870518138268d6be[m
+Author: Matthew Weeks <weeksling@gmail.com>
+Date:   Wed Sep 27 18:28:46 2017 -0400
+
+    Added Kotlin support
+
+[33mcommit 055ba174b7d02aca88f53358f5661e5fd4f65797[m
+Author: Matthew Weeks <weeksling@gmail.com>
+Date:   Wed Sep 27 17:53:35 2017 -0400
+
+    Tried creating the project AGAIN
+
+[33mcommit 278737341a59ddbd2911fca037aaaa074650bf45[m
+Author: Matthew Weeks <weeksling@gmail.com>
+Date:   Wed Sep 27 17:16:38 2017 -0400
+
+    Initial commit

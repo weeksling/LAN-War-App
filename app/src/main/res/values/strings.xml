@@ -19,4 +19,9 @@
     <string name="sponsorship">Sponsorship</string>
     <string name="follow_us_on_social_media">Follow us on social media!</string>
     <string name="title_home_page">Lan War   2018</string>
+    <string name="Notify_Me">Notify Me</string>
+    <string name="Location">Location:</string>
+    <string name="time">Time:</string>
+    <string name="date">Date:</string>
+    <string name="raffles">Raffles</string>
 </resources>

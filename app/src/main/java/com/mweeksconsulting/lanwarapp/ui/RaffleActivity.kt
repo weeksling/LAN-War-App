@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 //Used luigi http://piq.codeus.net/picture/288905/faceplant
-class Raffle_activity : AppCompatActivity(),Swipe {
+class RaffleActivity : AppCompatActivity(),Swipe {
 
     lateinit var pager :ViewPager
     lateinit var pageAdapter: ScreenSlidePageAdapter

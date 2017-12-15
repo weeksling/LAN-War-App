@@ -13,7 +13,12 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
+import android.webkit.WebView
 import com.mweeksconsulting.lanwarapp.Swipe
+import android.webkit.WebSettings
+import android.webkit.WebChromeClient
+
+
 
 class MainActivity : AppCompatActivity(), Swipe {
 

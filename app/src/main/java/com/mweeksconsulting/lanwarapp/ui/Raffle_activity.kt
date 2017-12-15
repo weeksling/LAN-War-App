@@ -78,24 +78,14 @@ class Raffle_activity : AppCompatActivity(),Swipe {
 
         Log.i("Raffle actitiy", "all items count" + LoadRafflesFromDB.CountItems().execute().get().toString())
 
-
-
         pager = findViewById<ViewPager>(R.id.ImageGallery)
         pageAdapter = ScreenSlidePageAdapter(supportFragmentManager,size,items)
         pager.adapter=pageAdapter
 
         pager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
-                Log.i("Raffle actitiy","page selected listner, size $position")
-                items?.forEach {
-                    i ->
-                    Log.i("Raffle actitiy","item $i")
-                }
-
-
             }
         })
-
 
         Log.i("current raffle: ", raffle.toString())
         var time = if (raffle?.raffleTime!=null) raffle.raffleTime else ""
@@ -105,6 +95,9 @@ class Raffle_activity : AppCompatActivity(),Swipe {
         val timeView = findViewById<TextView>(R.id.Time)
         val dateView = findViewById<TextView>(R.id.Raffle_Date)
         val locationView = findViewById<TextView>(R.id.Location)
+        val timeLabel = findViewById<TextView>(R.id.time_label)
+        val dateLabel = findViewById<TextView>(R.id.date_lable)
+        val locationLabel = findViewById<TextView>(R.id.loc_label)
 
         timeView.text=time
         dateView.text=date
@@ -114,6 +107,7 @@ class Raffle_activity : AppCompatActivity(),Swipe {
         val notify_button = findViewById<Button>(R.id.notify_button)
         notify_button.playSoundEffect(CLICK)
         notify_button.setOnClickListener{
+
             val NOTIFIED_KEY = "NOTIFIED"
             val sharedPref = this.getPreferences(android.content.Context.MODE_PRIVATE)
             var notified = sharedPref.getBoolean(NOTIFIED_KEY,false)
@@ -138,6 +132,12 @@ class Raffle_activity : AppCompatActivity(),Swipe {
         }
 
         if(raffle!=null) {
+            timeLabel.visibility=View.VISIBLE
+            dateLabel.visibility=View.VISIBLE
+            locationLabel.visibility=View.VISIBLE
+            pager.background=  null //@android:color/transparent
+
+
             //new alarm
             val pattern = "dd-MM-yyyy HH:mm"
             val dateFormat = SimpleDateFormat(pattern)
@@ -174,6 +174,14 @@ class Raffle_activity : AppCompatActivity(),Swipe {
             val alarmIntent: PendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
             am.set(AlarmManager.RTC_WAKEUP, setAlarm, alarmIntent)
             //}
+        }else{
+            timeLabel.visibility=View.INVISIBLE
+            dateLabel.visibility=View.INVISIBLE
+            locationLabel.visibility=View.INVISIBLE
+            pager.background=getDrawable(R.drawable.no_new_raffles)
+
+
+
         }
 
     }
@@ -209,7 +217,6 @@ class Raffle_activity : AppCompatActivity(),Swipe {
             }
         }
         return super<Swipe>.onTouchEvent(event)
-
 
     }
 }

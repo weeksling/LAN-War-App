@@ -79,6 +79,7 @@ class SponsorRepo:Runnable {
                 Log.i("Sponsor repo", "must download files")
 
 
+
                 sponsorPageRef.stream.addOnSuccessListener { snapShot ->
                     Executors.newSingleThreadExecutor().execute(DownloadSponsorData(snapShot.stream,
                             cloudDate, storageRef,

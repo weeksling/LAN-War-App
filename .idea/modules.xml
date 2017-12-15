@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LAN-War-App.iml" filepath="$PROJECT_DIR$/.idea/LAN-War-App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LAN-War-App.iml" filepath="$PROJECT_DIR$/LAN-War-App.iml" />
+      <module fileurl="file://C:\Users\Arshu\Downloads\LAN-War-App\.idea\LAN-War-App.iml" filepath="C:\Users\Arshu\Downloads\LAN-War-App\.idea\LAN-War-App.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

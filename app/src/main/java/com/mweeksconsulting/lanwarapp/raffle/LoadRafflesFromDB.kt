@@ -14,6 +14,9 @@ import java.util.*
 
 /**
  * Created by michael on 20/11/17.
+ * DB cannot be accessed on the main thread.
+ * this is just a loophole to let us do that
+ * as we call get on the asynctask
  */
 class LoadRafflesFromDB : AsyncTask<Void, Void, LiveData<List<Raffle>>?>(){
 

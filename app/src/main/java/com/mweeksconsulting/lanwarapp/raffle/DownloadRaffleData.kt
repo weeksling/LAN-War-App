@@ -12,15 +12,18 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 /**
  * Created by michael on 10/11/17.
+ * This class downloads the raffle data that was stored on Firebase
  */
 
 class DownloadRaffleData(val inStream:InputStream, val cloudDate :String, val raffleImageRef :StorageReference, val imageFilePath:String) :Runnable{
 
     override fun run() {
+        //set thread to background
             android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
             Log.i("Download raffle,", Thread.currentThread().name)
         LoadRafflesFromDB.DeleteRaffles().execute().get()
 
+        //normalize the xml stream
         val docFactory = DocumentBuilderFactory.newInstance()
             val docBuilder = docFactory.newDocumentBuilder()
             val doc = docBuilder.parse(inStream)
@@ -28,8 +31,8 @@ class DownloadRaffleData(val inStream:InputStream, val cloudDate :String, val ra
 
         val raffleList = doc.getElementsByTagName("raffle")
 
+        //build and store each raffle object
         for (i in 0 until raffleList.length) {
-
                 val node = raffleList.item(i)
                 if (node.nodeType == Node.ELEMENT_NODE) {
                     val attritubeNodes = node as Element
@@ -48,9 +51,13 @@ class DownloadRaffleData(val inStream:InputStream, val cloudDate :String, val ra
                         location = "????"
                     }
 
+                    //raffle information found store to DB
+                    //must insert before items due to the items
+                    //foriegn key constraint
                     val raffle = Raffle(date, time, location, cloudDate)
                     raffle.id = LoadRafflesFromDB.InsertRaffle(raffle).execute().get()
 
+                    //get the items asociated to the raffle and store them
                     for (i in 0 until itemList.length) {
                         val itemNode = itemList.item(i)
                         if (itemNode.nodeType == Node.ELEMENT_NODE) {
@@ -70,7 +77,7 @@ class DownloadRaffleData(val inStream:InputStream, val cloudDate :String, val ra
                             Log.i("download raffle", "item saved $item")
 
                             LoadRafflesFromDB.SaveItem(item).execute().get()
-
+                            //Download item images
                             if (img_name != null   && img_name.isNotEmpty()   && imgFile != null) {
                                 Log.i("download raffle", "image path: " + imageFilePath)
                                 Log.i("download raffle", "image name: " + img_name)

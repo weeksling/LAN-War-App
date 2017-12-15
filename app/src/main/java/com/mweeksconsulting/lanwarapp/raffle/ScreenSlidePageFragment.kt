@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.*
 
 /**
  * Created by michael on 12/12/17.
+ * This is what is shown as the raffle item name and image
  */
 class ScreenSlidePageFragment:Fragment() {
     private var itemList:Array<Item>? = null

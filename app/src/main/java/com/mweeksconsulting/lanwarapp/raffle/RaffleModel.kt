@@ -15,6 +15,7 @@ import kotlin.collections.ArrayList
 
 /**
  * Created by michael on 12/12/17.
+ * handle the data retreived from raffle repo
  */
 class RaffleModel:ViewModel() {
     private var  raffleList : LiveData<List<Raffle>>?= null
@@ -30,25 +31,22 @@ class RaffleModel:ViewModel() {
         Log.i("sponsor view model","got sponsors from sponsor REPO")
     }
 
+    //get all raffles
     fun getRaffles():LiveData<List<Raffle>>?{
         return raffleList
     }
 
-
-
-
+    //only want to get the soonest upcoming raffle
     fun getCurrentRaffle():Raffle?{
         val now = Calendar.getInstance()
         val pattern = "dd-MM-yyyy hh:mm a"
         val dateFormat = SimpleDateFormat(pattern)
-
-
-
         val currentDate =  now.time
-
-
         val arrList = raffleList?.value
 
+        //loop through all raffles.
+        //raffles are sorted by date and time
+        //from the database
 
         arrList?.forEach{
             ele ->
@@ -59,14 +57,12 @@ class RaffleModel:ViewModel() {
 
             Log.i("Raffle model","raffle date ${dateFormat.format(raffleDate)}")
             Log.i("Raffle model","current date ${currentDate}")
-
             Log.i("Raffle model","raffle date ${dateFormat.format(raffleDate)}")
             Log.i("Raffle model","currrent date ${dateFormat.format(currentDate)}")
 
 
             if(currentDate.before(raffleDate)){
                 Log.i("Raffle model","return $ele")
-
                 return ele
             }
         }

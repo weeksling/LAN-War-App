@@ -26,9 +26,12 @@ import android.os.Vibrator
 
 /**
  * Created by michael on 14/12/17.
+ * this class receiver the raffle alarm intent that is set to it
+ * sends a notification when the even is 1 hour away or 10 minutes away
  */
 class RaffleReciver:BroadcastReceiver() {
 
+    //decide which notification to send
     override fun onReceive(context: Context, intent: Intent) {
         Log.i("Raffle Reciever","raffled on Reveive")
         val dateString = intent.getStringExtra("TIME")
@@ -48,6 +51,7 @@ class RaffleReciver:BroadcastReceiver() {
 
     }
 
+    //send a reminder notification
     fun distanceNotification(raffleDate: Date, context: Context){
         Log.i("Raffle Reciever","distant notification")
 
@@ -98,6 +102,7 @@ class RaffleReciver:BroadcastReceiver() {
         am.set(AlarmManager.RTC_WAKEUP, tenMinutesBeforeRaffle.time, alarmIntent)
     }
 
+    //send an urgent reminder notification
     fun soonNotification(raffleDate: Date ,context: Context){
         Log.i("Raffle Reciever","soon notification")
         val notifyID = 1;

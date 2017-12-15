@@ -1,5 +1,6 @@
 package com.mweeksconsulting.lanwarapp.ui
 
+import android.app.Fragment
 import com.mweeksconsulting.lanwarapp.R
 import android.content.Context
 import android.content.Intent
@@ -13,12 +14,17 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
+import com.mweeksconsulting.lanwarapp.NavigationActivity
 import com.mweeksconsulting.lanwarapp.Swipe
+import android.view.ViewGroup
+import android.view.LayoutInflater
 
-class MainActivity : AppCompatActivity(), Swipe {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+class HomeFragment : NavigationActivity() {
+
+    override fun onCreate(savedInstanceBundle:Bundle?){
+        super.onCreate(savedInstanceBundle)
         setContentView(R.layout.activity_main)
     }
 
@@ -43,31 +49,10 @@ class MainActivity : AppCompatActivity(), Swipe {
     }
 
     private fun isConnected () : Boolean {
-        val connManager: ConnectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connManager: ConnectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connManager.activeNetworkInfo
         return networkInfo.isConnected
     }
 
-
-
-    override var mVelocityTracker: VelocityTracker? = null
-    override val context: Context = this
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if(event!=null){
-            val xVelocity = mVelocityTracker?.xVelocity
-            if (MotionEvent.ACTION_UP == event.actionMasked){
-                if (xVelocity != null && (xVelocity > 1000 || xVelocity < -1000)) {
-                    println("finish")
-                    println("finish:"+xVelocity)
-                    finish()
-                }
-
-
-            }
-        }
-        return super<Swipe>.onTouchEvent(event)
-
-
-    }
 
 }

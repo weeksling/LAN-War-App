@@ -8,7 +8,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -24,7 +23,7 @@ import com.mweeksconsulting.lanwarapp.staff.data_handler.StaffModel
 import java.util.concurrent.Executors
 
 
-class StaffActivity : AppCompatActivity (), Swipe{
+class StaffActivity : NavigationActivity(){
     lateinit var staffViewModel : StaffModel
     lateinit var netWorkReceiver:StaffNetwork
     var netWorkReceiverReg=false
@@ -88,7 +87,7 @@ class StaffActivity : AppCompatActivity (), Swipe{
 
 
     private fun refreshList(newStaff:List<Staff>){
-        setContentView(R.layout.activity_staff_)
+        setContentView(R.layout.activity_staff)
 
         Log.i("staff activity", R.id.staffList.toString())
         val listview : ListView = findViewById<ListView>(R.id.staffList)
@@ -96,21 +95,6 @@ class StaffActivity : AppCompatActivity (), Swipe{
         listview.adapter=adapter
     }
 
-
-    override val context: Context = this
-    override var mVelocityTracker: VelocityTracker? = null
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        println("MOTION")
-        if (event != null) {
-            val xVelocity = mVelocityTracker?.xVelocity
-            if (MotionEvent.ACTION_UP == event.actionMasked) {
-                if (xVelocity != null && (xVelocity > 1000|| xVelocity < -1000)) {
-                    finish()
-                }
-            }
-        }
-        return super<Swipe>.onTouchEvent(event)
-    }
 
     override fun onPause() {
         super.onPause()

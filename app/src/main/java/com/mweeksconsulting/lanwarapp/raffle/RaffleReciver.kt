@@ -15,13 +15,8 @@ import android.app.NotificationManager
 import android.app.NotificationChannel
 import android.os.Build
 import android.media.RingtoneManager
-import android.media.Ringtone
 import android.app.PendingIntent
-import android.os.VibrationEffect
-import com.mweeksconsulting.lanwarapp.ui.Raffle_activity
-import android.os.Vibrator
-
-
+import com.mweeksconsulting.lanwarapp.ui.RaffleActivity
 
 
 /**
@@ -68,7 +63,7 @@ class RaffleReciver:BroadcastReceiver() {
         val bodyText=raffleMessage(raffleDate) + "\n" + dateDiff.time
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val contentIntent = PendingIntent.getActivity(context, 0, Intent(context, Raffle_activity::class.java), 0)
+        val contentIntent = PendingIntent.getActivity(context, 0, Intent(context, RaffleActivity::class.java), 0)
 
         @TargetApi(26)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -115,7 +110,7 @@ class RaffleReciver:BroadcastReceiver() {
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val contentIntent = PendingIntent.getActivity(context, 0, Intent(context, Raffle_activity::class.java), 0)
+        val contentIntent = PendingIntent.getActivity(context, 0, Intent(context, RaffleActivity::class.java), 0)
 
 
 

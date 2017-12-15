@@ -24,7 +24,7 @@ import com.mweeksconsulting.lanwarapp.R
 import java.util.concurrent.Executors
 
 
-class SponsorsActivity : AppCompatActivity(),Swipe {
+class SponsorsActivity : NavigationActivity() {
     lateinit var sponsorViewModel : SponsorModel
     lateinit var netWorkReceiver: SponsorNetwork
     var sponsorList:List<Sponsor>?=null
@@ -75,7 +75,7 @@ class SponsorsActivity : AppCompatActivity(),Swipe {
             Log.i("Sponsor activity",sponsor.toString())
             val path = sponsor.webSite
             if(path != null) {
-                val connManager:ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val connManager:ConnectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                 val networkInfo = connManager.activeNetworkInfo
                 val isConnected = networkInfo?.isConnected
 
@@ -120,22 +120,6 @@ class SponsorsActivity : AppCompatActivity(),Swipe {
     }
 
 
-    override val context: Context = this
-    override var mVelocityTracker: VelocityTracker? = null
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        println("sponsors")
-        if(event!=null){
-            val xVelocity = mVelocityTracker?.xVelocity
-            if (MotionEvent.ACTION_UP == event.actionMasked){
-                if (xVelocity != null && (xVelocity > 1000|| xVelocity < -1000)) {
-                    println("finish")
-                    println("finish:"+xVelocity)
-                    finish()
-
-                }            }
-        }
-        return super<Swipe>.onTouchEvent(event)
-    }
 
     inner class SponsorNetwork: BroadcastReceiver() {
         override fun onReceive(context: Context, p1: Intent?) {

@@ -23,11 +23,12 @@ import android.view.VelocityTracker
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import com.mweeksconsulting.lanwarapp.NavigationActivity
 import com.mweeksconsulting.lanwarapp.Swipe
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Raffle_activity : AppCompatActivity(),Swipe {
+class RaffleActivity : NavigationActivity(),Swipe {
 
     lateinit var pager :ViewPager
     lateinit var pageAdapter: ScreenSlidePageAdapter

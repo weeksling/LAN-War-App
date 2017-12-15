@@ -38,10 +38,10 @@ interface Swipe{
                 MotionEvent.ACTION_UP -> {
                     val xVelocity = mVelocityTracker?.xVelocity
 
-                    val mainClass = MainActivity::class.java
+                    val mainClass = HomeFragment::class.java
                     val sponsorShipClass = SponsorsActivity::class.java
                     val staffClass = StaffActivity::class.java
-                    val raffleClass = Raffle_activity::class.java
+                    val raffleClass = RaffleActivity::class.java
 
 
 

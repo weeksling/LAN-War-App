@@ -1,8 +1,8 @@
 <resources>
 
-    <style name="AppTheme" parent="MyMaterialTheme.Base"/>
+    <style name="AppTheme" parent="MyMaterialTheme.Base" />
 
-    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -19,5 +19,14 @@
     <style name="blackOpsButtonTheme" parent="android:Widget.Holo.Button">
         <item name="android:fontFamily">@font/black_ops_one</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

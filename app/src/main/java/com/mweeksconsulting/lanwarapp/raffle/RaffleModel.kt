@@ -39,8 +39,9 @@ class RaffleModel:ViewModel() {
 
     fun getCurrentRaffle():Raffle?{
         val now = Calendar.getInstance()
-        val pattern = "dd-MM-yyyy HH:mm"
+        val pattern = "dd-MM-yyyy hh:mm a"
         val dateFormat = SimpleDateFormat(pattern)
+
 
 
         val currentDate =  now.time
@@ -55,7 +56,8 @@ class RaffleModel:ViewModel() {
             Log.i("Raffle model","input: $input")
 
             val raffleDate = dateFormat.parse(input)
-            Log.i("Raffle model","raffle date ${raffleDate}")
+
+            Log.i("Raffle model","raffle date ${dateFormat.format(raffleDate)}")
             Log.i("Raffle model","current date ${currentDate}")
 
             Log.i("Raffle model","raffle date ${dateFormat.format(raffleDate)}")

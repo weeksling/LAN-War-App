@@ -43,10 +43,6 @@ class ScreenSlidePageFragment:Fragment() {
         if(tmp!=null) {
             pos = tmp
         }
-        Log.i("Screen Slide","On Create pos: $pos")
-        val path = itemList?.get(pos)?.imagePath
-        Log.i("Screen Slide","On Create :img path: $path" )
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

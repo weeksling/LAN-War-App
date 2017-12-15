@@ -41,6 +41,7 @@ class LanWarApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         Log.i("lan war app","DELETE DB")
 
         //DB = Room.databaseBuilder(this, LanWarDatabase::class.java, "LanWarDataBase").build()
@@ -66,6 +67,12 @@ class LanWarApplication : Application() {
         Executors.newSingleThreadExecutor().execute(sponsorRepo)
         Executors.newSingleThreadExecutor().execute(staffRepo)
         Log.i("Lan war app","On Create")
+
+
+
+
+
+
 
     }
 

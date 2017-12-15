@@ -31,17 +31,10 @@ class RaffleReciver:BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.i("Raffle Reciever","raffled on Reveive")
-        val sharedPref = context.getSharedPreferences ("TIME",android.content.Context.MODE_PRIVATE)
-        val dateString = sharedPref.getString("time","12-12-19970 24:00")
-        val pattern1 = "dd-MM-yyyy HH:mm"
+        val dateString = intent.getStringExtra("TIME")
+        val pattern1 = "dd-MM-yyyy hh:mm a"
         val dateFormat1 = SimpleDateFormat(pattern1)
         val date = dateFormat1.parse(dateString)
-        val pattern2 = "HH:mm"
-        val dateFormat2 = SimpleDateFormat(pattern2)
-        val timeFormat = dateFormat2.format(date)
-
-        Log.i("Raffle Reciever","time $timeFormat")
-
 
         val now = Calendar.getInstance() as Calendar
 
@@ -85,8 +78,6 @@ class RaffleReciver:BroadcastReceiver() {
                 .setOnlyAlertOnce(true)
                 .setLights(Color.RED, 3000, 3000)
                 .setChannelId(CHANNEL_ID).build()
-
-
         notificationManager.notify(notifyID,notification)
 
         Log.i("Raffle Reciever","built notification")
@@ -152,8 +143,9 @@ class RaffleReciver:BroadcastReceiver() {
 
     fun raffleMessage(currentRaffleTime:Date):String{
         val ct = Calendar.getInstance() as Calendar
-        val pattern = "hh:mm"
+        val pattern = "hh:mm a"
         val dateFormat = SimpleDateFormat(pattern)
+
         if(currentRaffleTime.before(ct.time)){
             return "There is a raffle going on now!"
         }
